@@ -1681,8 +1681,8 @@ function SectionBlock({
 
 const GLOBE_LOGO_FACES = [0, 180] as const;
 
-function HeroLogo({ lite }: { lite?: boolean }) {
-  if (lite) {
+function HeroLogo({ reducedMotion }: { reducedMotion?: boolean }) {
+  if (reducedMotion) {
     return (
       <div className="hero-logo-static">
         <Image
@@ -1887,7 +1887,7 @@ export default function Home() {
             className="agency-section--lead"
             prepend={
               <div className="leadership-globe hero-spotlight py-4 sm:py-8 mb-2 sm:mb-4">
-                <HeroLogo lite={liteMode} />
+                <HeroLogo reducedMotion={reducedMotion} />
               </div>
             }
           >

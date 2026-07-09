@@ -236,7 +236,14 @@ body {
 .leadership-globe {
   display: flex;
   justify-content: center;
-  min-height: 260px;
+  min-height: 280px;
+  overflow: visible;
+}
+
+@media (min-width: 640px) {
+  .leadership-globe {
+    min-height: 320px;
+  }
 }
 
 @media (min-width: 640px) {
@@ -3054,17 +3061,6 @@ body {
   .page-enter,
   .roster-alt__row {
     animation: none !important;
-  }
-
-  .bball-globe,
-  .bball-scene__orbit,
-  .bball-scene__ring,
-  .bball-scene__shadow {
-    animation: none !important;
-  }
-
-  .bball-scene__ring--2 {
-    display: none;
   }
 
   .glass-panel,
