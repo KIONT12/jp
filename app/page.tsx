@@ -1680,38 +1680,36 @@ function SectionBlock({
 }
 
 const GLOBE_LOGO_FACES = [0, 90, 180, 270] as const;
-const GLOBE_ORBIT_TAGS = ["WNBA", "FIBA", "GLOBAL", "JPSA"] as const;
+const GLOBE_SATELLITES = ["WNBA", "FIBA", "GLOBAL"] as const;
 
 function BasketballGlobe() {
   return (
     <div className="bball-scene" role="img" aria-label="J. Parker Sports Agency logo on a spinning basketball globe">
       <div className="bball-scene__aura" aria-hidden="true" />
-      <div className="bball-scene__court-floor" aria-hidden="true" />
-      <div className="bball-scene__particles" aria-hidden="true">
+      <div className="bball-scene__sparks" aria-hidden="true">
         {Array.from({ length: 8 }, (_, i) => (
-          <span key={i} className="bball-particle" style={{ "--p-i": i } as CSSProperties} />
-        ))}
-      </div>
-      <div className="bball-scene__orbit-track" aria-hidden="true">
-        {GLOBE_ORBIT_TAGS.map((tag, i) => (
-          <span
-            key={tag}
-            className="bball-orbit-tag"
-            style={{ "--orbit-i": i } as CSSProperties}
-          >
-            {tag}
-          </span>
+          <span key={i} className="bball-spark" style={{ "--spark-i": i } as CSSProperties} />
         ))}
       </div>
       <div className="bball-scene__shadow" />
       <div className="bball-scene__orbit">
+        <div className="bball-scene__ring bball-scene__ring--halo" />
         <div className="bball-scene__ring" />
         <div className="bball-scene__ring bball-scene__ring--2" />
         <div className="bball-scene__ring bball-scene__ring--3" />
+        {GLOBE_SATELLITES.map((label, i) => (
+          <div
+            key={label}
+            className="bball-satellite"
+            style={{ "--sat-i": i } as CSSProperties}
+          >
+            <span>{label}</span>
+          </div>
+        ))}
         <div className="bball-globe">
           <div className="bball-globe__glow" aria-hidden="true" />
           <div className="bball-globe__body" />
-          <div className="bball-globe__shine" aria-hidden="true" />
+          <div className="bball-globe__sheen" aria-hidden="true" />
           <div className="bball-globe__seams">
             <div className="bball-seam bball-seam--1" />
             <div className="bball-seam bball-seam--2" />
@@ -1721,12 +1719,13 @@ function BasketballGlobe() {
           <div className="bball-globe__logos">
             {GLOBE_LOGO_FACES.map((deg, i) => (
               <div key={deg} className={`bball-logo-face bball-logo-face--${deg}`}>
+                <div className="bball-logo-face__shine" aria-hidden="true" />
                 <Image
                   src={LOGO_FULL}
                   alt={i === 0 ? "J. Parker Sports Agency" : ""}
                   width={600}
                   height={600}
-                  className="w-full h-full object-contain p-1"
+                  className="bball-logo-face__img"
                   priority={i === 0}
                 />
               </div>
@@ -1734,7 +1733,7 @@ function BasketballGlobe() {
           </div>
         </div>
       </div>
-      <p className="bball-scene__caption">Just Positive™</p>
+      <div className="bball-scene__floor" aria-hidden="true" />
     </div>
   );
 }
