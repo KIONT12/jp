@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { CSSProperties, FormEvent, ReactNode, useEffect, useState } from "react";
+import { FormEvent, ReactNode, useEffect, useState } from "react";
 import { useIsMobile, usePrefersReducedMotion } from "./hooks/use-mobile";
 
 const LOGO = "/images/logos/jpsa-logo.png";
 const LOGO_FULL = LOGO;
 const FOUNDER_PHOTO = "/images/team/j-parker.jpg";
 const WAYNE_PHOTO = "/images/team/wayne-wooten-headshot.jpg";
+const MUSA_PHOTO = "/images/team/musa-shabazz.png";
 const VISION_LEGACY_PDF = "/documents/jenaya-parker-vision-and-legacy-2026.pdf";
 
 const AGENCY_CONTACT = {
@@ -137,6 +138,18 @@ const WAYNE_FOCUS = [
   "Director of Player Personnel",
   "Global Talent ID",
   "NCAA · FIBA · Pro",
+];
+
+const MUSA_BIO = [
+  "Musa Shabazz serves as Sports Agent Advisor for J. Parker Sports Agency, supporting athlete representation, contract guidance, and career strategy alongside the JPSA leadership team.",
+  "He works directly with athletes and families to evaluate opportunities, build professional relationships, and navigate the business side of basketball with clarity and confidence.",
+  "As Sports Agent Advisor, Musa strengthens the agency's player support network — helping clients make informed decisions from recruitment through professional careers.",
+];
+
+const MUSA_FOCUS = [
+  "Sports Agent Advisor",
+  "Athlete Representation",
+  "Career Strategy",
 ];
 
 const VISION_GOALS_2026 = {
@@ -1566,6 +1579,7 @@ function LeaderProfileCard({
   bio,
   tags,
   layout = "stacked",
+  imageClassName,
 }: {
   badge: string;
   role: string;
@@ -1576,6 +1590,7 @@ function LeaderProfileCard({
   bio: string[];
   tags: string[];
   layout?: "split" | "stacked";
+  imageClassName?: string;
 }) {
   const isSplit = layout === "split";
 
@@ -1597,7 +1612,7 @@ function LeaderProfileCard({
             width={800}
             height={1000}
             sizes={isSplit ? "(max-width: 640px) 280px, 320px" : "100vw"}
-            className={isSplit ? "founder-photo" : "leader-portrait"}
+            className={imageClassName ?? (isSplit ? "founder-photo" : "leader-portrait")}
             priority={isSplit}
           />
         ) : (
@@ -1679,64 +1694,7 @@ function SectionBlock({
   );
 }
 
-const GLOBE_LOGO_FACES = [0, 90, 180, 270] as const;
-const GLOBE_SATELLITES = ["WNBA", "FIBA", "GLOBAL"] as const;
-
-function BasketballGlobe() {
-  return (
-    <div className="bball-scene" role="img" aria-label="J. Parker Sports Agency logo on a spinning basketball globe">
-      <div className="bball-scene__aura" aria-hidden="true" />
-      <div className="bball-scene__sparks" aria-hidden="true">
-        {Array.from({ length: 8 }, (_, i) => (
-          <span key={i} className="bball-spark" style={{ "--spark-i": i } as CSSProperties} />
-        ))}
-      </div>
-      <div className="bball-scene__shadow" />
-      <div className="bball-scene__orbit">
-        <div className="bball-scene__ring bball-scene__ring--halo" />
-        <div className="bball-scene__ring" />
-        <div className="bball-scene__ring bball-scene__ring--2" />
-        <div className="bball-scene__ring bball-scene__ring--3" />
-        {GLOBE_SATELLITES.map((label, i) => (
-          <div
-            key={label}
-            className="bball-satellite"
-            style={{ "--sat-i": i } as CSSProperties}
-          >
-            <span>{label}</span>
-          </div>
-        ))}
-        <div className="bball-globe">
-          <div className="bball-globe__glow" aria-hidden="true" />
-          <div className="bball-globe__body" />
-          <div className="bball-globe__sheen" aria-hidden="true" />
-          <div className="bball-globe__seams">
-            <div className="bball-seam bball-seam--1" />
-            <div className="bball-seam bball-seam--2" />
-            <div className="bball-seam bball-seam--3" />
-            <div className="bball-seam bball-seam--4" />
-          </div>
-          <div className="bball-globe__logos">
-            {GLOBE_LOGO_FACES.map((deg, i) => (
-              <div key={deg} className={`bball-logo-face bball-logo-face--${deg}`}>
-                <div className="bball-logo-face__shine" aria-hidden="true" />
-                <Image
-                  src={LOGO_FULL}
-                  alt={i === 0 ? "J. Parker Sports Agency" : ""}
-                  width={600}
-                  height={600}
-                  className="bball-logo-face__img"
-                  priority={i === 0}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="bball-scene__floor" aria-hidden="true" />
-    </div>
-  );
-}
+const GLOBE_LOGO_FACES = [0, 180] as const;
 
 function HeroLogo({ reducedMotion }: { reducedMotion?: boolean }) {
   if (reducedMotion) {
@@ -1754,6 +1712,41 @@ function HeroLogo({ reducedMotion }: { reducedMotion?: boolean }) {
     );
   }
   return <BasketballGlobe />;
+}
+
+function BasketballGlobe() {
+  return (
+    <div className="bball-scene" role="img" aria-label="J. Parker Sports Agency logo on a spinning basketball globe">
+      <div className="bball-scene__shadow" />
+      <div className="bball-scene__orbit">
+        <div className="bball-scene__ring" />
+        <div className="bball-scene__ring bball-scene__ring--2" />
+        <div className="bball-globe">
+          <div className="bball-globe__body" />
+          <div className="bball-globe__seams">
+            <div className="bball-seam bball-seam--1" />
+            <div className="bball-seam bball-seam--2" />
+            <div className="bball-seam bball-seam--3" />
+            <div className="bball-seam bball-seam--4" />
+          </div>
+          <div className="bball-globe__logos">
+            {GLOBE_LOGO_FACES.map((deg, i) => (
+              <div key={deg} className={`bball-logo-face bball-logo-face--${deg}`}>
+                <Image
+                  src={LOGO_FULL}
+                  alt={i === 0 ? "J. Parker Sports Agency" : ""}
+                  width={600}
+                  height={600}
+                  className="w-full h-full object-contain p-1"
+                  priority={i === 0}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function Home() {
@@ -2091,6 +2084,18 @@ export default function Home() {
                 tags={WAYNE_FOCUS}
                 layout="split"
               />
+              <LeaderProfileCard
+                badge="Team Advisor"
+                role="Sports Agent Advisor"
+                name="Musa Shabazz"
+                org="J. Parker Sports Agency"
+                image={MUSA_PHOTO}
+                imageAlt="Musa Shabazz, Sports Agent Advisor, J. Parker Sports Agency"
+                bio={MUSA_BIO}
+                tags={MUSA_FOCUS}
+                layout="split"
+                imageClassName="founder-photo leader-photo-cover"
+              />
             </div>
           </SectionBlock>
 
@@ -2127,7 +2132,7 @@ export default function Home() {
           </SectionBlock>
 
           <SectionBlock id="accolades" number="03" label="Experience" title="Accolades & Expertise">
-            <div className="mt-8 sm:mt-10 grid md:grid-cols-2 gap-6">
+            <div className="mt-8 sm:mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="glass-panel p-6 sm:p-8">
                 <h3 className="font-display font-bold text-lg uppercase text-white mb-5">
                   Agent Parker
@@ -2150,6 +2155,22 @@ export default function Home() {
                 </p>
                 <ul className="accolade-list">
                   {WAYNE_FOCUS.map((tag) => (
+                    <li key={tag}>
+                      <i className="fa-solid fa-star text-gold-hot text-xs" />
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="glass-panel p-6 sm:p-8 md:col-span-2 lg:col-span-1">
+                <h3 className="font-display font-bold text-lg uppercase text-white mb-1">
+                  Musa Shabazz
+                </h3>
+                <p className="text-xs uppercase tracking-[0.14em] text-gold-hot mb-5">
+                  Team Advisor · Sports Agent Advisor
+                </p>
+                <ul className="accolade-list">
+                  {MUSA_FOCUS.map((tag) => (
                     <li key={tag}>
                       <i className="fa-solid fa-star text-gold-hot text-xs" />
                       {tag}
