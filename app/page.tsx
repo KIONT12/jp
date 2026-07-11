@@ -1722,7 +1722,7 @@ function BasketballGlobe() {
                   alt={i === 0 ? "J. Parker Sports Agency" : ""}
                   width={600}
                   height={600}
-                  className="w-[92%] h-[92%] object-contain"
+                  className="w-full h-full object-contain p-1"
                   priority={i === 0}
                 />
               </div>
@@ -1806,7 +1806,7 @@ export default function Home() {
                   alt="J. Parker Sports Agency"
                   width={600}
                   height={600}
-                  className="h-10 w-auto max-w-[9.5rem] object-contain bg-white px-1.5 py-0.5 shrink-0 rounded-lg group-hover:ring-2 ring-[rgba(165,28,36,0.45)] transition-all"
+                  className="h-11 w-auto max-w-[3.25rem] object-contain shrink-0 rounded-md group-hover:ring-2 ring-[rgba(165,28,36,0.45)] transition-all"
           priority
         />
               </div>
@@ -2504,7 +2504,7 @@ export default function Home() {
               alt="J. Parker Sports Agency"
               width={600}
               height={600}
-              className="h-9 w-auto max-w-[8.5rem] object-contain bg-white px-1 py-0.5 shrink-0 rounded"
+              className="h-10 w-auto max-w-[2.75rem] object-contain shrink-0 rounded-md"
             />
             <span className="font-display text-xs tracking-[0.15em] uppercase text-zinc-500">
               © 2026 J. Parker Sports Agency
