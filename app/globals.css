@@ -196,11 +196,20 @@ body {
 .hero-spotlight::before {
   content: "";
   position: absolute;
-  width: 120%;
-  height: 120%;
+  width: 130%;
+  height: 130%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(196, 30, 58, 0.12) 0%, transparent 65%);
+  background:
+    radial-gradient(circle, rgba(196, 30, 58, 0.16) 0%, transparent 42%),
+    radial-gradient(circle at 70% 30%, rgba(107, 70, 193, 0.1) 0%, transparent 45%),
+    radial-gradient(circle at 25% 70%, rgba(26, 54, 93, 0.12) 0%, transparent 40%);
   pointer-events: none;
+  animation: hero-aura-pulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes hero-aura-pulse {
+  0% { transform: scale(0.95); opacity: 0.75; }
+  100% { transform: scale(1.05); opacity: 1; }
 }
 
 .agency-hero {
@@ -236,13 +245,13 @@ body {
 .leadership-globe {
   display: flex;
   justify-content: center;
-  min-height: 280px;
+  min-height: 340px;
   overflow: visible;
 }
 
 @media (min-width: 640px) {
   .leadership-globe {
-    min-height: 320px;
+    min-height: 400px;
   }
 }
 
@@ -256,7 +265,7 @@ body {
   }
 
   .leadership-globe {
-    min-height: 320px;
+    min-height: 400px;
   }
 }
 
@@ -1606,21 +1615,167 @@ body {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* ─── 3D BASKETBALL GLOBE (unchanged) ─── */
+/* ─── 3D BASKETBALL GLOBE ─── */
 .bball-scene {
   position: relative;
-  width: 260px;
-  height: 300px;
+  width: 280px;
+  height: 340px;
   margin: 0 auto;
-  perspective: 1100px;
-  perspective-origin: 50% 42%;
+  perspective: 1200px;
+  perspective-origin: 50% 40%;
 }
 
 @media (min-width: 640px) {
   .bball-scene {
-    width: 320px;
-    height: 360px;
+    width: 360px;
+    height: 420px;
   }
+}
+
+.bball-scene__aura {
+  position: absolute;
+  inset: 8% 0 18%;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      from 210deg,
+      rgba(196, 30, 58, 0.22),
+      rgba(26, 54, 93, 0.18),
+      rgba(107, 70, 193, 0.2),
+      rgba(196, 30, 58, 0.22)
+    );
+  filter: blur(28px);
+  opacity: 0.75;
+  animation: globe-aura-spin 14s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes globe-aura-spin {
+  to { transform: rotate(360deg); }
+}
+
+.bball-scene__court-floor {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 92%;
+  height: 42px;
+  transform: translateX(-50%) rotateX(68deg);
+  transform-origin: center top;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(196, 30, 58, 0.35) 50%, transparent 100%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 0,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px,
+      transparent 28px
+    );
+  border-top: 2px solid rgba(196, 30, 58, 0.45);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.bball-scene__particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bball-particle {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 50%;
+  background: var(--brand-red-hot);
+  box-shadow: 0 0 10px rgba(196, 30, 58, 0.8);
+  animation: particle-orbit 10s linear infinite;
+  animation-delay: calc(var(--p-i) * -1.25s);
+  transform: rotate(calc(var(--p-i) * 45deg)) translateX(145px) rotate(calc(var(--p-i) * -45deg));
+}
+
+@media (min-width: 640px) {
+  .bball-particle {
+    transform: rotate(calc(var(--p-i) * 45deg)) translateX(175px) rotate(calc(var(--p-i) * -45deg));
+  }
+}
+
+@keyframes particle-orbit {
+  to { transform: rotate(calc(var(--p-i) * 45deg + 360deg)) translateX(145px) rotate(calc(var(--p-i) * -45deg - 360deg)); }
+}
+
+@media (min-width: 640px) {
+  @keyframes particle-orbit {
+    to { transform: rotate(calc(var(--p-i) * 45deg + 360deg)) translateX(175px) rotate(calc(var(--p-i) * -45deg - 360deg)); }
+  }
+}
+
+.bball-scene__orbit-track {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bball-orbit-tag {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -0.65rem 0 0 -1.65rem;
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(196, 30, 58, 0.45);
+  background: rgba(10, 15, 24, 0.82);
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-red-hot);
+  white-space: nowrap;
+  animation: tag-orbit 18s linear infinite;
+  animation-delay: calc(var(--orbit-i) * -4.5s);
+  transform: rotate(calc(var(--orbit-i) * 90deg)) translateX(128px) rotate(calc(var(--orbit-i) * -90deg));
+}
+
+@media (min-width: 640px) {
+  .bball-orbit-tag {
+    font-size: 0.58rem;
+    margin-left: -1.85rem;
+    transform: rotate(calc(var(--orbit-i) * 90deg)) translateX(158px) rotate(calc(var(--orbit-i) * -90deg));
+  }
+}
+
+@keyframes tag-orbit {
+  to { transform: rotate(calc(var(--orbit-i) * 90deg + 360deg)) translateX(128px) rotate(calc(var(--orbit-i) * -90deg - 360deg)); }
+}
+
+@media (min-width: 640px) {
+  @keyframes tag-orbit {
+    to { transform: rotate(calc(var(--orbit-i) * 90deg + 360deg)) translateX(158px) rotate(calc(var(--orbit-i) * -90deg - 360deg)); }
+  }
+}
+
+.bball-scene__caption {
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  transform: translateX(-50%);
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(196, 30, 58, 0.85);
+  white-space: nowrap;
+  animation: caption-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes caption-glow {
+  0% { opacity: 0.55; text-shadow: none; }
+  100% { opacity: 1; text-shadow: 0 0 12px rgba(196, 30, 58, 0.45); }
 }
 
 .bball-scene__shadow {
@@ -1669,9 +1824,26 @@ body {
 .bball-scene__ring--2 {
   width: 118%;
   height: 118%;
-  border-color: rgba(165, 28, 36, 0.12);
+  border-color: rgba(107, 70, 193, 0.2);
   animation-duration: 32s;
   animation-direction: reverse;
+}
+
+.bball-scene__ring--3 {
+  width: 128%;
+  height: 128%;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--background), var(--background)) padding-box,
+    conic-gradient(
+      from 0deg,
+      rgba(196, 30, 58, 0.55),
+      rgba(26, 54, 93, 0.35),
+      rgba(107, 70, 193, 0.45),
+      rgba(196, 30, 58, 0.55)
+    ) border-box;
+  animation-duration: 12s;
+  opacity: 0.65;
 }
 
 @keyframes ring-spin {
@@ -1683,7 +1855,7 @@ body {
   width: 220px;
   height: 220px;
   transform-style: preserve-3d;
-  animation: bball-spin 16s linear infinite;
+  animation: bball-spin 14s linear infinite;
   --globe-r: 108px;
 }
 
@@ -1696,8 +1868,53 @@ body {
 }
 
 @keyframes bball-spin {
-  from { transform: rotateX(-16deg) rotateY(0deg); }
-  to { transform: rotateX(-16deg) rotateY(360deg); }
+  from { transform: rotateX(-18deg) rotateY(0deg); }
+  to { transform: rotateX(-18deg) rotateY(360deg); }
+}
+
+.bball-globe__glow {
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 30, 58, 0.28) 0%, transparent 68%);
+  filter: blur(10px);
+  animation: globe-glow-pulse 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes globe-glow-pulse {
+  0% { opacity: 0.45; transform: scale(0.96); }
+  100% { opacity: 0.9; transform: scale(1.04); }
+}
+
+.bball-globe__shine {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.bball-globe__shine::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.14) 48%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(255, 255, 255, 0.14) 52%,
+    transparent 62%
+  );
+  animation: globe-shine-sweep 5s ease-in-out infinite;
+}
+
+@keyframes globe-shine-sweep {
+  0%, 100% { transform: translateX(-60%) rotate(12deg); opacity: 0; }
+  45%, 55% { opacity: 1; }
+  100% { transform: translateX(60%) rotate(12deg); }
 }
 
 .bball-globe__body {
@@ -1783,7 +2000,9 @@ body {
 }
 
 .bball-logo-face--0 { transform: rotateY(0deg) translateZ(var(--globe-r)); }
+.bball-logo-face--90 { transform: rotateY(90deg) translateZ(var(--globe-r)); }
 .bball-logo-face--180 { transform: rotateY(180deg) translateZ(var(--globe-r)); }
+.bball-logo-face--270 { transform: rotateY(270deg) translateZ(var(--globe-r)); }
 
 .live-bg--lite .live-bg__aurora {
   animation: none;

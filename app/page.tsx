@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, ReactNode, useEffect, useState } from "react";
+import { CSSProperties, FormEvent, ReactNode, useEffect, useState } from "react";
 import { useIsMobile, usePrefersReducedMotion } from "./hooks/use-mobile";
 
 const LOGO = "/images/logos/jpsa-logo.png";
@@ -1679,35 +1679,39 @@ function SectionBlock({
   );
 }
 
-const GLOBE_LOGO_FACES = [0, 180] as const;
-
-function HeroLogo({ reducedMotion }: { reducedMotion?: boolean }) {
-  if (reducedMotion) {
-    return (
-      <div className="hero-logo-static">
-        <Image
-          src={LOGO}
-          alt="J. Parker Sports Agency"
-          width={600}
-          height={600}
-          className="hero-logo-static__img"
-          priority
-        />
-      </div>
-    );
-  }
-  return <BasketballGlobe />;
-}
+const GLOBE_LOGO_FACES = [0, 90, 180, 270] as const;
+const GLOBE_ORBIT_TAGS = ["WNBA", "FIBA", "GLOBAL", "JPSA"] as const;
 
 function BasketballGlobe() {
   return (
     <div className="bball-scene" role="img" aria-label="J. Parker Sports Agency logo on a spinning basketball globe">
+      <div className="bball-scene__aura" aria-hidden="true" />
+      <div className="bball-scene__court-floor" aria-hidden="true" />
+      <div className="bball-scene__particles" aria-hidden="true">
+        {Array.from({ length: 8 }, (_, i) => (
+          <span key={i} className="bball-particle" style={{ "--p-i": i } as CSSProperties} />
+        ))}
+      </div>
+      <div className="bball-scene__orbit-track" aria-hidden="true">
+        {GLOBE_ORBIT_TAGS.map((tag, i) => (
+          <span
+            key={tag}
+            className="bball-orbit-tag"
+            style={{ "--orbit-i": i } as CSSProperties}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
       <div className="bball-scene__shadow" />
       <div className="bball-scene__orbit">
         <div className="bball-scene__ring" />
         <div className="bball-scene__ring bball-scene__ring--2" />
+        <div className="bball-scene__ring bball-scene__ring--3" />
         <div className="bball-globe">
+          <div className="bball-globe__glow" aria-hidden="true" />
           <div className="bball-globe__body" />
+          <div className="bball-globe__shine" aria-hidden="true" />
           <div className="bball-globe__seams">
             <div className="bball-seam bball-seam--1" />
             <div className="bball-seam bball-seam--2" />
@@ -1730,8 +1734,27 @@ function BasketballGlobe() {
           </div>
         </div>
       </div>
+      <p className="bball-scene__caption">Just Positive™</p>
     </div>
   );
+}
+
+function HeroLogo({ reducedMotion }: { reducedMotion?: boolean }) {
+  if (reducedMotion) {
+    return (
+      <div className="hero-logo-static">
+        <Image
+          src={LOGO}
+          alt="J. Parker Sports Agency"
+          width={600}
+          height={600}
+          className="hero-logo-static__img"
+          priority
+        />
+      </div>
+    );
+  }
+  return <BasketballGlobe />;
 }
 
 export default function Home() {
