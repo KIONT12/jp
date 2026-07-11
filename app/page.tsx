@@ -128,6 +128,51 @@ const AFFILIATIONS = [
   },
 ];
 
+const ATHLETES_ABROAD_SUMMIT = {
+  title: "Athletes Abroad Summit",
+  tagline: "Global sports business · Networking · Athlete empowerment",
+  description:
+    "J. Parker Sports Agency on the ground at the Athletes Abroad Summit — connecting with industry leaders, building international relationships, and representing the next generation of athlete success.",
+  photos: [
+    {
+      src: "/images/summit/athletes-abroad-summit-05.png",
+      alt: "J. Parker Sports Agency team at the Athletes Abroad Summit group photo",
+      caption: "JPSA on the floor — Athletes Abroad Summit",
+      width: 1600,
+      height: 1200,
+      featured: true,
+    },
+    {
+      src: "/images/summit/athletes-abroad-summit-04.png",
+      alt: "Award presentation at the Athletes Abroad Summit with JPSA representation",
+      caption: "Summit recognition & industry connections",
+      width: 1200,
+      height: 1600,
+    },
+    {
+      src: "/images/summit/athletes-abroad-summit-02.png",
+      alt: "Musa Shabazz at the Athletes Abroad Summit step and repeat",
+      caption: "Sports Agent Advisor · Musa Shabazz",
+      width: 1200,
+      height: 1600,
+    },
+    {
+      src: "/images/summit/athletes-abroad-summit-01.png",
+      alt: "Athletes Abroad Summit networking at the event backdrop",
+      caption: "Building abroad — summit networking",
+      width: 1600,
+      height: 1200,
+    },
+    {
+      src: "/images/summit/athletes-abroad-summit-03.png",
+      alt: "Athletes Abroad Summit sponsor backdrop with USA Today Sports",
+      caption: "USA Today Sports · Summit partners",
+      width: 1200,
+      height: 1600,
+    },
+  ],
+};
+
 const WAYNE_BIO = [
   "Wayne Wooten is a business partner and Director of Player Personnel at J. Parker Sports Agency. He brings decades of experience in scouting, coaching, and league administration, identifying elite talent and bridging the gap between international prospects and professional opportunities.",
   "He evaluates players across NCAA, FIBA, and professional levels while implementing regional protocols to find standouts ready for premier competition.",
@@ -2246,7 +2291,45 @@ export default function Home() {
             </div>
           </SectionBlock>
 
-          <SectionBlock id="vision-legacy" number="05" label="Vision & Legacy" title="Jenaya Parker — Vision and Legacy">
+          <SectionBlock
+            id="athletes-abroad-summit"
+            number="05"
+            label="On The Road"
+            title={ATHLETES_ABROAD_SUMMIT.title}
+          >
+            <p className="text-zinc-400 text-sm sm:text-base mt-4 max-w-2xl">
+              {ATHLETES_ABROAD_SUMMIT.description}
+            </p>
+            <p className="text-xs text-gold-hot tracking-[0.2em] uppercase mt-3">
+              {ATHLETES_ABROAD_SUMMIT.tagline}
+            </p>
+            <div className="summit-gallery mt-8 sm:mt-10">
+              {ATHLETES_ABROAD_SUMMIT.photos.map((photo) => (
+                <figure
+                  key={photo.src}
+                  className={`summit-gallery__item${
+                    photo.featured ? " summit-gallery__item--featured" : ""
+                  }`}
+                >
+                  <div className="summit-gallery__frame">
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      width={photo.width}
+                      height={photo.height}
+                      className="summit-gallery__img"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                  {photo.caption ? (
+                    <figcaption className="summit-gallery__caption">{photo.caption}</figcaption>
+                  ) : null}
+                </figure>
+              ))}
+            </div>
+          </SectionBlock>
+
+          <SectionBlock id="vision-legacy" number="06" label="Vision & Legacy" title="Jenaya Parker — Vision and Legacy">
             <p className="text-zinc-400 text-sm sm:text-base mt-4 max-w-2xl">
               The official JPSA vision document — faith, purpose, and the legacy being built
               in women&apos;s basketball worldwide.
