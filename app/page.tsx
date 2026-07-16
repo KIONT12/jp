@@ -392,6 +392,77 @@ type RosterPlayer = {
 
 const ROSTER: RosterPlayer[] = [
   {
+    num: "14",
+    name: "Isaiah Todd",
+    position: "Power Forward",
+    detail: "NBA · Washington Wizards",
+    image: "/images/players/isaiah-todd.png",
+    signed: true,
+    resume: {
+      summary:
+        "NBA draft pick and professional power forward represented by J. Parker Sports Agency Management. A 6'9\" forward with NBA experience, international pro stops, and a versatile skill set built through the G League Ignite pathway and Washington Wizards system.",
+      metrics: [
+        { label: "Height", value: "6'9\"" },
+        { label: "Weight", value: "219 lbs" },
+        { label: "Position", value: "Power Forward" },
+        { label: "Jersey", value: "#14" },
+        { label: "Draft", value: "2021 · Round 2 · Pick 31" },
+      ],
+      experience: [
+        {
+          role: "Power Forward",
+          team: "Kaohsiung Steelers · P. League+",
+          period: "2025–Present",
+        },
+        {
+          role: "Power Forward",
+          team: "Šiauliai–Casino Admiral · Lithuania",
+          period: "2024–25",
+        },
+        {
+          role: "Power Forward",
+          team: "Washington Wizards · NBA",
+          period: "2021–23",
+          stats: "18 GP · 1.6 PPG · 1.3 RPG · 0.4 APG",
+          detail:
+            "Former Washington Wizards forward drafted 31st overall in the 2021 NBA Draft. NBA experience with Capital City Go-Go G League assignment.",
+        },
+        {
+          role: "Forward",
+          team: "NBA G League Ignite",
+          period: "2020–21",
+          detail:
+            "Elite prep-to-pro pathway before entering the 2021 NBA Draft as a consensus five-star recruit.",
+        },
+      ],
+      skills: [
+        "NBA Experience",
+        "Versatile Scoring",
+        "Perimeter Shooting",
+        "Rebounding",
+        "International Pro",
+        "Brand Building",
+        "Global Opportunities",
+      ],
+      highlights: [
+        "2021 NBA Draft · 31st overall pick",
+        "Washington Wizards · #14",
+        "Signed by J. Parker Sports Agency Management",
+        "Empowering Athletes. Building Legacies.",
+      ],
+      profileLinks: [
+        {
+          label: "Basketball-Reference",
+          href: "https://www.basketball-reference.com/players/t/toddis01.html",
+        },
+        {
+          label: "RealGM Profile",
+          href: "https://basketball.realgm.com/player/Isaiah-Todd/Summary/117340",
+        },
+      ],
+    },
+  },
+  {
     num: "07",
     name: "Jamani Pierce",
     position: "Combo Guard",
