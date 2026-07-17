@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { FormEvent, ReactNode, useEffect, useState } from "react";
-import { useIsMobile, usePrefersReducedMotion } from "./hooks/use-mobile";
+import { useIsMobile, usePerformanceMode } from "./hooks/use-mobile";
 
 const LOGO = "/images/logos/jpsa-logo.png";
 const LOGO_FULL = LOGO;
@@ -386,6 +386,7 @@ type RosterPlayer = {
   detail: string;
   image: string;
   signed: boolean;
+  featured?: boolean;
   nameOnImage?: boolean;
   resume?: PlayerResume;
 };
@@ -394,71 +395,47 @@ const ROSTER: RosterPlayer[] = [
   {
     num: "14",
     name: "Isaiah Todd",
-    position: "Power Forward",
-    detail: "NBA · Washington Wizards",
+    position: "Forward",
+    detail: "NBA Player",
     image: "/images/players/isaiah-todd.png",
     signed: true,
+    featured: true,
     resume: {
       summary:
-        "NBA draft pick and professional power forward represented by J. Parker Sports Agency Management. A 6'9\" forward with NBA experience, international pro stops, and a versatile skill set built through the G League Ignite pathway and Washington Wizards system.",
+        "NBA forward signed to J. Parker Sports Agency Management. Elite size and versatility with professional experience at basketball's highest level — representation, brand building, career management, and global opportunities.",
       metrics: [
-        { label: "Height", value: "6'9\"" },
-        { label: "Weight", value: "219 lbs" },
-        { label: "Position", value: "Power Forward" },
+        { label: "Position", value: "Forward" },
+        { label: "Height", value: "6'10\"" },
+        { label: "Level", value: "NBA Player" },
         { label: "Jersey", value: "#14" },
-        { label: "Draft", value: "2021 · Round 2 · Pick 31" },
       ],
       experience: [
         {
-          role: "Power Forward",
-          team: "Kaohsiung Steelers · P. League+",
-          period: "2025–Present",
-        },
-        {
-          role: "Power Forward",
-          team: "Šiauliai–Casino Admiral · Lithuania",
-          period: "2024–25",
-        },
-        {
-          role: "Power Forward",
+          role: "Forward",
           team: "Washington Wizards · NBA",
-          period: "2021–23",
-          stats: "18 GP · 1.6 PPG · 1.3 RPG · 0.4 APG",
           detail:
-            "Former Washington Wizards forward drafted 31st overall in the 2021 NBA Draft. NBA experience with Capital City Go-Go G League assignment.",
+            "NBA experience with the Washington Wizards — competing at the highest professional level in the league.",
         },
         {
           role: "Forward",
           team: "NBA G League Ignite",
-          period: "2020–21",
           detail:
-            "Elite prep-to-pro pathway before entering the 2021 NBA Draft as a consensus five-star recruit.",
+            "Developed as a top prospect in the NBA G League Ignite program on the path to the NBA.",
         },
       ],
       skills: [
         "NBA Experience",
+        "Floor Spacing",
         "Versatile Scoring",
-        "Perimeter Shooting",
-        "Rebounding",
-        "International Pro",
+        "Shot Blocking",
         "Brand Building",
+        "Career Management",
         "Global Opportunities",
       ],
       highlights: [
-        "2021 NBA Draft · 31st overall pick",
-        "Washington Wizards · #14",
         "Signed by J. Parker Sports Agency Management",
-        "Empowering Athletes. Building Legacies.",
-      ],
-      profileLinks: [
-        {
-          label: "Basketball-Reference",
-          href: "https://www.basketball-reference.com/players/t/toddis01.html",
-        },
-        {
-          label: "RealGM Profile",
-          href: "https://basketball.realgm.com/player/Isaiah-Todd/Summary/117340",
-        },
+        "NBA professional represented by JPSA",
+        "Empowering athletes. Building legacies.",
       ],
     },
   },
@@ -1497,7 +1474,7 @@ function RosterPlayerRow({
 
   return (
     <article
-      className={`roster-alt__row ${index % 2 === 1 ? "roster-alt__row--flip" : ""}${lite ? " roster-alt__row--static" : ""}`}
+      className={`roster-alt__row${player.featured ? " roster-alt__row--featured" : ""} ${index % 2 === 1 ? "roster-alt__row--flip" : ""}${lite ? " roster-alt__row--static" : ""}`}
       style={lite ? undefined : { animationDelay: `${index * 0.1}s` }}
     >
       {hasResume ? (
@@ -1552,6 +1529,12 @@ function RosterPlayerRow({
       )}
 
       <div className="roster-alt__body">
+        {player.featured && (
+          <span className="roster-alt__featured-badge">
+            <i className="fa-solid fa-star" />
+            Headline Signing
+          </span>
+        )}
         {player.signed && (
           <span className="roster-alt__badge">
             <i className="fa-solid fa-pen-nib" />
@@ -1564,6 +1547,11 @@ function RosterPlayerRow({
         <h3 className="font-display font-bold text-2xl sm:text-4xl uppercase text-white leading-tight">
           {player.name}
         </h3>
+        {player.detail && (
+          <p className={`roster-alt__detail${player.featured ? " roster-alt__detail--featured" : ""}`}>
+            {player.detail}
+          </p>
+        )}
         {hasResume && (
           <button type="button" onClick={openResume} className="roster-bio-btn">
             <i className="fa-solid fa-file-lines" aria-hidden="true" />
@@ -1812,8 +1800,8 @@ function SectionBlock({
 
 const GLOBE_LOGO_FACES = [0, 180] as const;
 
-function HeroLogo({ reducedMotion }: { reducedMotion?: boolean }) {
-  if (reducedMotion) {
+function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
+  if (staticLogo) {
     return (
       <div className="hero-logo-static">
         <Image
@@ -1871,8 +1859,7 @@ export default function Home() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [activeResumePlayer, setActiveResumePlayer] = useState<RosterPlayer | null>(null);
   const isMobile = useIsMobile(1024);
-  const reducedMotion = usePrefersReducedMotion();
-  const liteMode = isMobile || reducedMotion;
+  const liteMode = usePerformanceMode(1280);
   const animateText = !liteMode;
 
   function openPlayerResume(player: RosterPlayer) {
@@ -1937,6 +1924,7 @@ export default function Home() {
                   alt="J. Parker Sports Agency"
                   width={600}
                   height={600}
+                  sizes="44px"
                   className="h-11 w-auto max-w-[3.25rem] object-contain shrink-0 rounded-md group-hover:ring-2 ring-[rgba(165,28,36,0.45)] transition-all"
           priority
         />
@@ -2018,7 +2006,7 @@ export default function Home() {
             className="agency-section--lead"
             prepend={
               <div className="leadership-globe hero-spotlight py-4 sm:py-8 mb-2 sm:mb-4">
-                <HeroLogo reducedMotion={reducedMotion} />
+                <HeroLogo staticLogo={liteMode} />
               </div>
             }
           >
@@ -2389,7 +2377,8 @@ export default function Home() {
                       width={photo.width}
                       height={photo.height}
                       className="summit-gallery__img"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                      loading="lazy"
                     />
                   </div>
                   {photo.caption ? (

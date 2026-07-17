@@ -226,6 +226,8 @@ body {
 .agency-section {
   padding: 3.5rem 0;
   border-top: 1px solid var(--line);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 520px;
 }
 
 .agency-section--lead {
@@ -536,6 +538,8 @@ body {
   border: 1px solid var(--line);
   background: var(--surface-dark);
   animation: page-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 420px;
 }
 
 @media (min-width: 768px) {
@@ -639,6 +643,50 @@ body {
 
 .roster-alt__row--static {
   animation: none;
+}
+
+.roster-alt__row--featured {
+  border-color: rgba(196, 30, 58, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(196, 30, 58, 0.12),
+    0 16px 48px rgba(0, 0, 0, 0.35);
+}
+
+@media (min-width: 768px) {
+  .roster-alt__row--featured {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}
+
+.roster-alt__featured-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: linear-gradient(135deg, var(--brand-red-hot), var(--brand-red));
+  color: white;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.roster-alt__detail {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  letter-spacing: 0.06em;
+}
+
+.roster-alt__detail--featured {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-hot);
 }
 
 .roster-bio-btn {
@@ -3093,10 +3141,10 @@ body {
   color: #8a6d12;
 }
 
-/* Mobile performance */
-@media (max-width: 767px) {
+/* Performance mode — phones, tablets, and touch devices */
+@media (max-width: 1279px) {
   .live-bg__grid,
-  .live-bg__orb--3 {
+  .live-bg__orb {
     display: none;
   }
 
@@ -3114,13 +3162,38 @@ body {
     animation: none !important;
   }
 
+  .char-in {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  .logo-float,
+  .bball-globe,
+  .bball-scene__orbit,
+  .bball-scene__ring,
+  .bball-scene__shadow {
+    animation: none !important;
+  }
+
+  .bball-globe {
+    transform: rotateX(-16deg) rotateY(-30deg) !important;
+  }
+
+  .ticker-track {
+    animation: none;
+  }
+
   .glass-panel,
   nav,
   .mobile-dock,
   .resume-modal__backdrop {
     backdrop-filter: none;
   }
+}
 
+/* Mobile layout tweaks */
+@media (max-width: 767px) {
   .resume-modal {
     padding: 0;
     align-items: stretch;

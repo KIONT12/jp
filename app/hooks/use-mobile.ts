@@ -29,3 +29,31 @@ export function usePrefersReducedMotion() {
 
   return reduced;
 }
+
+/** Lite/perf mode: tablets, touch devices, and reduced-motion preferences. */
+export function usePerformanceMode(breakpoint = 1280) {
+  const [perfMode, setPerfMode] = useState(true);
+
+  useEffect(() => {
+    const widthMq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const touchMq = window.matchMedia("(pointer: coarse)");
+
+    const update = () => {
+      setPerfMode(widthMq.matches || motionMq.matches || touchMq.matches);
+    };
+
+    update();
+    widthMq.addEventListener("change", update);
+    motionMq.addEventListener("change", update);
+    touchMq.addEventListener("change", update);
+
+    return () => {
+      widthMq.removeEventListener("change", update);
+      motionMq.removeEventListener("change", update);
+      touchMq.removeEventListener("change", update);
+    };
+  }, [breakpoint]);
+
+  return perfMode;
+}
