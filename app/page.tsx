@@ -440,6 +440,42 @@ const ROSTER: RosterPlayer[] = [
     },
   },
   {
+    num: "02",
+    name: "Javion Belle McCrary",
+    position: "Guard",
+    detail: "JPSA Signed Athlete",
+    image: "/images/players/javion-belle-mccrary.jpg",
+    signed: true,
+    resume: {
+      summary:
+        "Guard signed to J. Parker Sports Agency Management. Dynamic on-ball presence with scoring ability, competitive fire, and a foundation built for global opportunities, career growth, and legacy building.",
+      metrics: [
+        { label: "Position", value: "Guard" },
+        { label: "Jersey", value: "#02" },
+        { label: "Status", value: "Signed · JPSA" },
+      ],
+      experience: [
+        {
+          role: "Guard",
+          team: "J. Parker Sports Agency Management",
+          detail:
+            "Signed athlete represented for global opportunities, career growth, expert guidance, and legacy building.",
+        },
+      ],
+      skills: [
+        "On-Ball Scoring",
+        "Ball Handling",
+        "Competitive Fire",
+        "Career Growth",
+        "Global Opportunities",
+      ],
+      highlights: [
+        "Signed by J. Parker Sports Agency Management",
+        "More than an agency — we build legacies",
+      ],
+    },
+  },
+  {
     num: "07",
     name: "Jamani Pierce",
     position: "Combo Guard",
