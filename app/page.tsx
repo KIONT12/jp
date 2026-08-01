@@ -9,6 +9,7 @@ const LOGO_FULL = LOGO;
 const FOUNDER_PHOTO = "/images/team/j-parker.jpg";
 const WAYNE_PHOTO = "/images/team/wayne-wooten-headshot.jpg";
 const MUSA_PHOTO = "/images/team/musa-shabazz.png";
+const KELII_PHOTO = "/images/team/kelii-fish.jpg";
 const VISION_LEGACY_PDF = "/documents/jenaya-parker-vision-and-legacy-2026.pdf";
 
 const AGENCY_CONTACT = {
@@ -195,6 +196,18 @@ const MUSA_FOCUS = [
   "Sports Agent Advisor",
   "Athlete Representation",
   "Career Strategy",
+];
+
+const KELII_BIO = [
+  "Kelii Fish is a sports journalist, digital media specialist, and content creator passionate about telling the stories of the next generation of athletes. With more than 140 published articles on BallerTube, Kelii has built a reputation for delivering accurate, engaging coverage of high school, grassroots, and emerging talent while helping athletes grow their visibility.",
+  "At J. Parker Sports Agency, Kelii combines storytelling, branding, and social media expertise to showcase athletes, promote agency initiatives, and strengthen connections between players, fans, and the basketball community. Driven by authenticity and a commitment to excellence, Kelii is dedicated to creating meaningful content that highlights athletes both on and off the court.",
+];
+
+const KELII_FOCUS = [
+  "Digital Media Specialist",
+  "Sports Journalism",
+  "Athlete Branding",
+  "140+ BallerTube Articles",
 ];
 
 const VISION_GOALS_2026 = {
@@ -2236,6 +2249,18 @@ export default function Home() {
                 layout="split"
                 imageClassName="founder-photo leader-photo-cover"
               />
+              <LeaderProfileCard
+                badge="Media Team"
+                role="Digital Media Specialist"
+                name="Kelii Fish"
+                org="J. Parker Sports Agency"
+                image={KELII_PHOTO}
+                imageAlt="Kelii Fish, Digital Media Specialist, J. Parker Sports Agency"
+                bio={KELII_BIO}
+                tags={KELII_FOCUS}
+                layout="split"
+                imageClassName="founder-photo leader-photo-cover"
+              />
             </div>
           </SectionBlock>
 
@@ -2302,7 +2327,7 @@ export default function Home() {
                   ))}
                 </ul>
               </div>
-              <div className="glass-panel p-6 sm:p-8 md:col-span-2 lg:col-span-1">
+              <div className="glass-panel p-6 sm:p-8">
                 <h3 className="font-display font-bold text-lg uppercase text-white mb-1">
                   Musa Shabazz
                 </h3>
@@ -2311,6 +2336,22 @@ export default function Home() {
                 </p>
                 <ul className="accolade-list">
                   {MUSA_FOCUS.map((tag) => (
+                    <li key={tag}>
+                      <i className="fa-solid fa-star text-gold-hot text-xs" />
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="glass-panel p-6 sm:p-8 md:col-span-2 lg:col-span-1">
+                <h3 className="font-display font-bold text-lg uppercase text-white mb-1">
+                  Kelii Fish
+                </h3>
+                <p className="text-xs uppercase tracking-[0.14em] text-gold-hot mb-5">
+                  Media Team · Digital Media Specialist
+                </p>
+                <ul className="accolade-list">
+                  {KELII_FOCUS.map((tag) => (
                     <li key={tag}>
                       <i className="fa-solid fa-star text-gold-hot text-xs" />
                       {tag}
