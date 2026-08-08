@@ -489,6 +489,44 @@ const ROSTER: RosterPlayer[] = [
     },
   },
   {
+    num: "02",
+    name: "Christopher Bradford",
+    position: "Guard",
+    detail: "JPSA Signed Athlete",
+    image: "/images/players/christopher-bradford.jpg",
+    signed: true,
+    resume: {
+      summary:
+        "Guard signed to J. Parker Sports Agency. Competitive scorer with on-ball creation, multipurpose athleticism, and a foundation for global opportunities, strategic guidance, brand development, and career management.",
+      metrics: [
+        { label: "Position", value: "Guard" },
+        { label: "Jersey", value: "#02" },
+        { label: "Status", value: "Signed · JPSA" },
+      ],
+      experience: [
+        {
+          role: "Guard",
+          team: "J. Parker Sports Agency",
+          detail:
+            "Signed athlete represented for global opportunities, strategic guidance, brand development, and career management.",
+        },
+      ],
+      skills: [
+        "Scoring",
+        "Ball Handling",
+        "Athleticism",
+        "Brand Development",
+        "Career Management",
+        "Global Opportunities",
+      ],
+      highlights: [
+        "Signed by J. Parker Sports Agency",
+        "Your journey. Our mission.",
+        "Representing excellence. Building legacies.",
+      ],
+    },
+  },
+  {
     num: "07",
     name: "Jamani Pierce",
     position: "Combo Guard",
@@ -1541,7 +1579,8 @@ function RosterPlayerRow({
                 width={900}
                 height={1100}
                 sizes="(max-width: 768px) 100vw, 50vw"
-                loading="lazy"
+                priority={index === 0}
+                loading={index === 0 ? undefined : "lazy"}
                 quality={75}
                 className="roster-alt__img"
               />
@@ -1733,6 +1772,7 @@ function LeaderProfileCard({
   tags,
   layout = "stacked",
   imageClassName,
+  priority = false,
 }: {
   badge: string;
   role: string;
@@ -1744,6 +1784,7 @@ function LeaderProfileCard({
   tags: string[];
   layout?: "split" | "stacked";
   imageClassName?: string;
+  priority?: boolean;
 }) {
   const isSplit = layout === "split";
 
@@ -1766,7 +1807,8 @@ function LeaderProfileCard({
             height={1000}
             sizes={isSplit ? "(max-width: 640px) 280px, 320px" : "100vw"}
             className={imageClassName ?? (isSplit ? "founder-photo" : "leader-portrait")}
-            priority={isSplit}
+            priority={priority}
+            loading={priority ? undefined : "lazy"}
           />
         ) : (
           <ImagePlaceholder label="Photo" />
@@ -2070,6 +2112,7 @@ export default function Home() {
                 bio={FOUNDER_BIO}
                 tags={FOUNDER_TAGS}
                 layout="split"
+                priority
               />
               <div className="mt-6 flex flex-wrap gap-3">
                 <button
@@ -2225,6 +2268,7 @@ export default function Home() {
                 bio={FOUNDER_BIO}
                 tags={FOUNDER_TAGS}
                 layout="split"
+                priority
               />
               <LeaderProfileCard
                 badge="Business Partner"
