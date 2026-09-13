@@ -1966,7 +1966,7 @@ function SectionBlock({
 }
 
 const GLOBE_LOGO_FACES = [0, 180] as const;
-const FINGER_SPIN_HAND = "/images/hero/jp-finger-spin.png";
+const FINGER_SPIN_HAND = "/images/hero/jp-woman-hand-v2.png";
 
 function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
   if (staticLogo) {
