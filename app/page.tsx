@@ -1973,9 +1973,9 @@ function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
       <div className="hero-logo-static">
         <Image
           src={LOGO}
-          alt="J. Parker Sports Agency"
-          width={600}
-          height={600}
+          alt="J. Parker Sports Agency Management"
+          width={377}
+          height={445}
           className="hero-logo-static__img"
           priority
         />
@@ -2005,10 +2005,10 @@ function BasketballGlobe() {
               <div key={deg} className={`bball-logo-face bball-logo-face--${deg}`}>
                 <Image
                   src={LOGO_FULL}
-                  alt={i === 0 ? "J. Parker Sports Agency" : ""}
-                  width={600}
-                  height={600}
-                  className="w-full h-full object-contain p-1"
+                  alt={i === 0 ? "J. Parker Sports Agency Management" : ""}
+                  width={377}
+                  height={445}
+                  className="w-full h-full object-contain"
                   priority={i === 0}
                 />
               </div>
@@ -2080,26 +2080,24 @@ export default function Home() {
       {/* NAV */}
       <nav className="sticky top-0 z-50 brand-nav backdrop-blur-md">
         <div className="site-shell">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-16 sm:h-[4.5rem]">
             <button
               type="button"
               onClick={() => switchTab("home")}
               className="flex items-center gap-2.5 group shrink-0"
+              aria-label="J. Parker Sports Agency — Home"
             >
               <div className={liteMode ? "" : "logo-float"}>
-        <Image
+                <Image
                   src={LOGO}
-                  alt="J. Parker Sports Agency"
-                  width={600}
-                  height={600}
-                  sizes="44px"
-                  className="h-11 w-auto max-w-[3.25rem] object-contain shrink-0 rounded-md group-hover:ring-2 ring-[rgba(165,28,36,0.45)] transition-all"
-          priority
-        />
+                  alt="J. Parker Sports Agency Management"
+                  width={377}
+                  height={445}
+                  sizes="(max-width: 640px) 88px, 120px"
+                  className="site-logo site-logo--nav group-hover:ring-2 ring-[rgba(165,28,36,0.45)] transition-all"
+                  priority
+                />
               </div>
-              <span className="font-display font-bold text-sm sm:text-lg tracking-wider text-white hidden sm:block group-hover:text-gold-hot transition-colors">
-                J. Parker Sports Agency
-              </span>
             </button>
 
             <div className="hidden lg:flex pill-nav">
@@ -2976,13 +2974,14 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <Image
               src={LOGO}
-              alt="J. Parker Sports Agency"
-              width={600}
-              height={600}
-              className="h-10 w-auto max-w-[2.75rem] object-contain shrink-0 rounded-md"
+              alt="J. Parker Sports Agency Management"
+              width={377}
+              height={445}
+              sizes="72px"
+              className="site-logo site-logo--footer shrink-0"
             />
             <span className="font-display text-xs tracking-[0.15em] uppercase text-zinc-500">
-              © 2026 J. Parker Sports Agency
+              © 2026 J. Parker Sports Agency Management
               <span className="block sm:inline sm:before:content-['·_'] text-zinc-600 normal-case tracking-normal mt-1 sm:mt-0">
                 Updated {SITE_UPDATED}
               </span>

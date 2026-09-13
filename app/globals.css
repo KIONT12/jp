@@ -816,14 +816,38 @@ body {
 }
 
 .hero-logo-static__img {
-  width: min(200px, 68vw);
+  width: min(220px, 70vw);
   height: auto;
   object-fit: contain;
   border-radius: 0.75rem;
-  border: 1px solid rgba(165, 28, 36, 0.15);
+  border: 1px solid rgba(165, 28, 36, 0.2);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.35),
     0 12px 40px rgba(196, 30, 58, 0.18);
+}
+
+.site-logo {
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.site-logo--nav {
+  height: 2.75rem;
+  max-width: 5.5rem;
+}
+
+@media (min-width: 640px) {
+  .site-logo--nav {
+    height: 3.25rem;
+    max-width: 7rem;
+  }
+}
+
+.site-logo--footer {
+  height: 3.25rem;
+  max-width: 4.5rem;
 }
 
 .merch-featured {
@@ -1951,15 +1975,15 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 108px;
-  height: 132px;
-  margin-left: -54px;
-  margin-top: -66px;
+  width: 96px;
+  height: 118px;
+  margin-left: -48px;
+  margin-top: -59px;
   backface-visibility: visible;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #e8e8e8;
+  background: #0a0a0a;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
   overflow: hidden;
@@ -1968,10 +1992,10 @@ body {
 
 @media (min-width: 640px) {
   .bball-logo-face {
-    width: 128px;
-    height: 156px;
-    margin-left: -64px;
-    margin-top: -78px;
+    width: 112px;
+    height: 136px;
+    margin-left: -56px;
+    margin-top: -68px;
   }
 }
 

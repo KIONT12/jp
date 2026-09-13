@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   description:
     "Empowering the Game. Elevating the Player. WNBA & international women's basketball representation.",
   icons: {
-    icon: "/images/logos/jpsa-logo.png",
-    apple: "/images/logos/jpsa-logo.png",
+    icon: "/images/logos/jpsa-logo-square.png",
+    apple: "/images/logos/jpsa-logo-square.png",
   },
 };
 
