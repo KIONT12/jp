@@ -1990,7 +1990,7 @@ function BasketballGlobe() {
     <div
       className="bball-scene tech-globe"
       role="img"
-      aria-label="J. Parker Sports Agency logo on a tech orbital display"
+      aria-label="J. Parker Sports Agency logo on a tech basketball orbit"
     >
       <div className="bball-scene__shadow tech-globe__shadow" />
       <div className="tech-globe__glow" aria-hidden="true" />
@@ -2000,6 +2000,12 @@ function BasketballGlobe() {
         <div className="bball-scene__ring tech-globe__ring tech-globe__ring--3" />
         <div className="bball-globe tech-globe__core">
           <div className="bball-globe__body tech-globe__body" />
+          <div className="bball-globe__seams" aria-hidden="true">
+            <div className="bball-seam bball-seam--1" />
+            <div className="bball-seam bball-seam--2" />
+            <div className="bball-seam bball-seam--3" />
+            <div className="bball-seam bball-seam--4" />
+          </div>
           <div className="tech-globe__scan" aria-hidden="true" />
           <div className="bball-globe__logos">
             {GLOBE_LOGO_FACES.map((deg, i) => (
