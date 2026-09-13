@@ -58,6 +58,25 @@ const SERVICES = [
 const JPSA_TAGLINE = "Empowering the Game. Elevating the Player.";
 const SITE_UPDATED = "September 13, 2026";
 
+const AGAINST_THE_ODDS_BOOK = {
+  title: "Against the Odds",
+  subtitle: "No Seat at the Table, So I Built My Own",
+  fullTitle:
+    "Against the Odds: No Seat at the Table, So I Built My Own — The Untold Journey of a Black Female Sports Agent",
+  author: "JP · Jenaya Parker",
+  articleBy: "Kelii Fish · BallerTube",
+  published: "September 12, 2026",
+  href: "https://www.ballertube.com/news/714/against-the-odds-jp-s-story-of-building-her-own-table/",
+  tagline: "Her new book",
+  summary:
+    "JP’s powerful journey as a Black female sports agent, entrepreneur, and advocate — turning barriers into motivation and building her own path in sports.",
+  excerpts: [
+    "She could have spent her career waiting for someone to invite her into the room. Instead, she decided to create her own room. And, eventually, her own table.",
+    "Being overlooked does not mean you are incapable. Hearing “no” does not mean your story is over. Sometimes it means you need to build something that nobody else was willing to build.",
+    "The goal shouldn’t just be to sit down — it should be to make the table bigger.",
+  ],
+};
+
 const JPSA_BIO = [
   "J. Parker Sports Agency Management (JPSA) represents and develops elite women's basketball athletes across the WNBA and international markets. Founded on integrity, innovation, and athlete empowerment — management that goes far beyond the court.",
   "Contract negotiations, NIL & brand development, international placement, media training, personal branding, financial literacy, and post-career planning. Every athlete gets strategic guidance, personal attention, and a game plan built for their path.",
@@ -2180,6 +2199,13 @@ export default function Home() {
                 </button>
                 <button
                   type="button"
+                  onClick={() => switchTab("about", "against-the-odds")}
+                  className="outline-btn px-6 sm:px-8 py-3.5 min-h-12 font-display font-bold text-sm uppercase tracking-widest text-white w-full sm:w-auto"
+                >
+                  Against the Odds — The Book
+                </button>
+                <button
+                  type="button"
                   onClick={() => switchTab("players")}
                   className="outline-btn px-6 sm:px-8 py-3.5 min-h-12 font-display font-bold text-sm uppercase tracking-widest text-white w-full sm:w-auto"
                 >
@@ -2512,7 +2538,46 @@ export default function Home() {
             </div>
           </SectionBlock>
 
-          <SectionBlock id="vision-legacy" number="06" label="Vision & Legacy" title="Jenaya Parker — Vision and Legacy">
+          <SectionBlock
+            id="against-the-odds"
+            number="06"
+            label="The Book"
+            title={AGAINST_THE_ODDS_BOOK.title}
+          >
+            <p className="text-gold-hot text-xs sm:text-sm tracking-[0.14em] uppercase mt-3">
+              {AGAINST_THE_ODDS_BOOK.subtitle}
+            </p>
+            <p className="text-zinc-400 text-sm sm:text-base mt-4 max-w-2xl">
+              {AGAINST_THE_ODDS_BOOK.summary}
+            </p>
+            <article className="book-feature mt-8 sm:mt-10">
+              <div className="book-feature__badge">{AGAINST_THE_ODDS_BOOK.tagline}</div>
+              <h3 className="book-feature__title">{AGAINST_THE_ODDS_BOOK.fullTitle}</h3>
+              <p className="book-feature__meta">
+                {AGAINST_THE_ODDS_BOOK.author}
+                <span aria-hidden="true"> · </span>
+                Featured by {AGAINST_THE_ODDS_BOOK.articleBy}
+                <span aria-hidden="true"> · </span>
+                {AGAINST_THE_ODDS_BOOK.published}
+              </p>
+              <ul className="book-feature__excerpts">
+                {AGAINST_THE_ODDS_BOOK.excerpts.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+              <a
+                href={AGAINST_THE_ODDS_BOOK.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gold-bar inline-flex items-center justify-center gap-2 px-6 py-3.5 mt-6 font-display font-bold text-xs uppercase tracking-widest hover:brightness-110 transition"
+              >
+                Read the Full Story on BallerTube
+                <i className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" />
+              </a>
+            </article>
+          </SectionBlock>
+
+          <SectionBlock id="vision-legacy" number="07" label="Vision & Legacy" title="Jenaya Parker — Vision and Legacy">
             <p className="text-zinc-400 text-sm sm:text-base mt-4 max-w-2xl">
               The official JPSA vision document — faith, purpose, and the legacy being built
               in women&apos;s basketball worldwide.

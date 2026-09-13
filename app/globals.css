@@ -482,6 +482,71 @@ body {
   text-transform: uppercase;
 }
 
+.book-feature {
+  max-width: 48rem;
+  padding: 1.5rem 1.25rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(196, 30, 58, 0.35);
+  background:
+    linear-gradient(145deg, rgba(196, 30, 58, 0.12) 0%, transparent 42%),
+    rgba(16, 24, 39, 0.88);
+}
+
+@media (min-width: 640px) {
+  .book-feature {
+    padding: 2rem 2.25rem;
+  }
+}
+
+.book-feature__badge {
+  display: inline-flex;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, var(--brand-red-hot), var(--brand-red));
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.book-feature__title {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.15rem, 3vw, 1.65rem);
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.book-feature__meta {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--gold-hot);
+  margin-bottom: 1.25rem;
+}
+
+.book-feature__excerpts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.book-feature__excerpts li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #a1a1aa;
+  border-left: 2px solid rgba(196, 30, 58, 0.55);
+}
+
 @media (min-width: 640px) {
   .leader-photo-cover {
     height: 460px;
