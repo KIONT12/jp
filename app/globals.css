@@ -232,7 +232,42 @@ body {
 
 .agency-section--lead {
   border-top: none;
-  padding-top: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+/* Freestanding globe hero — not boxed */
+.globe-hero {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: none;
+  margin: 0 auto 1.25rem;
+  padding: 1.5rem 0 2rem;
+  overflow: visible;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.globe-hero--bleed {
+  margin: 0;
+  padding: 2rem 0 2.75rem;
+  background:
+    radial-gradient(ellipse 60% 55% at 50% 45%, rgba(30, 90, 200, 0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 65%);
+}
+
+@media (min-width: 640px) {
+  .globe-hero {
+    margin-bottom: 1.75rem;
+    padding: 2rem 0 2.5rem;
+  }
+
+  .globe-hero--bleed {
+    padding: 2.5rem 0 3.25rem;
+  }
 }
 
 .leadership-globe {
@@ -254,7 +289,7 @@ body {
   }
 
   .agency-section--lead {
-    padding-top: 2rem;
+    padding-top: 1rem;
   }
 
   .leadership-globe {
@@ -1824,20 +1859,29 @@ body {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* ─── SPIN GLOBE — WebGL full sphere (+ static CSS fallback) ─── */
+/* ─── SPIN GLOBE — freestanding WebGL sphere ─── */
 .spin-globe {
   position: relative;
-  width: min(300px, 86vw);
-  height: min(320px, 92vw);
+  width: min(360px, 92vw);
+  height: min(360px, 92vw);
   margin: 0 auto;
-  perspective: 1200px;
-  perspective-origin: 50% 42%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
 }
 
 @media (min-width: 640px) {
   .spin-globe {
-    width: 360px;
-    height: 380px;
+    width: 440px;
+    height: 440px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .spin-globe {
+    width: 520px;
+    height: 520px;
   }
 }
 
@@ -1846,19 +1890,20 @@ body {
 }
 
 .spin-globe--loading {
-  background:
-    radial-gradient(circle at 35% 30%, rgba(80, 140, 255, 0.25), transparent 45%),
-    radial-gradient(circle at 50% 52%, #0b2a6e 0%, #040b18 70%);
   border-radius: 50%;
-  width: min(270px, 78vw);
-  height: min(270px, 78vw);
-  margin: 20px auto 0;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(80, 140, 255, 0.3), transparent 45%),
+    radial-gradient(circle at 50% 52%, #0b2a6e 0%, #040b18 70%);
+  box-shadow:
+    0 0 60px rgba(40, 110, 210, 0.45),
+    0 0 100px rgba(212, 175, 55, 0.2);
 }
 
 .spin-globe__canvas {
   position: absolute;
   inset: 0;
   z-index: 2;
+  border-radius: 50%;
 }
 
 .spin-globe__canvas canvas {
@@ -1869,52 +1914,47 @@ body {
 
 .spin-globe__glow {
   position: absolute;
-  inset: 10% 6%;
+  inset: -8%;
   border-radius: 50%;
-  background:
-    radial-gradient(circle, rgba(212, 175, 55, 0.32) 0%, transparent 46%),
-    radial-gradient(circle, rgba(40, 110, 210, 0.38) 0%, transparent 66%);
-  filter: blur(22px);
+  background: radial-gradient(circle, rgba(60, 130, 255, 0.45) 0%, transparent 58%);
+  filter: blur(28px);
   pointer-events: none;
   z-index: 0;
+  animation: globe-glow-pulse 4.5s ease-in-out infinite;
+}
+
+.spin-globe__glow--gold {
+  inset: -2%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.38) 0%, transparent 52%);
+  filter: blur(34px);
+  animation-delay: -2s;
+}
+
+@keyframes globe-glow-pulse {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
 }
 
 .spin-globe__shadow {
   position: absolute;
-  bottom: 8px;
+  bottom: 2%;
   left: 50%;
-  width: 60%;
-  height: 20px;
+  width: 58%;
+  height: 18px;
   transform: translateX(-50%);
   background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55) 0%, transparent 72%);
-  filter: blur(9px);
+  filter: blur(10px);
   z-index: 0;
 }
 
-.spin-globe__orbit {
+.spin-globe__stage {
   position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform-style: preserve-3d;
-  z-index: 1;
-}
-
-.spin-globe__ball {
-  position: relative;
-  width: 220px;
-  height: 220px;
-  transform-style: preserve-3d;
-  --globe-r: 110px;
-}
-
-@media (min-width: 640px) {
-  .spin-globe__ball {
-    width: 270px;
-    height: 270px;
-    --globe-r: 135px;
-  }
+  inset: 8%;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow:
+    0 0 50px rgba(40, 110, 210, 0.45),
+    0 0 90px rgba(212, 175, 55, 0.22);
 }
 
 .spin-globe__body {
@@ -1925,13 +1965,6 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  box-shadow:
-    inset -34px -38px 60px rgba(0, 0, 0, 0.85),
-    inset 18px 20px 36px rgba(120, 180, 255, 0.18),
-    0 0 0 1px rgba(212, 175, 55, 0.22),
-    0 0 40px rgba(40, 110, 210, 0.4),
-    0 0 70px rgba(212, 175, 55, 0.15),
-    0 22px 44px rgba(0, 0, 0, 0.55);
 }
 
 .spin-globe__body-shade {
@@ -1945,58 +1978,36 @@ body {
     radial-gradient(circle at 50% 50%, transparent 52%, rgba(0, 0, 0, 0.45) 100%);
 }
 
-.spin-globe__logos {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-}
-
-.spin-globe__logo-face {
+.spin-globe__logo-overlay {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 96px;
-  height: 96px;
-  margin-left: -48px;
-  margin-top: -48px;
+  width: 58%;
+  height: 58%;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  box-sizing: border-box;
   border-radius: 50%;
-  background: rgba(4, 10, 24, 0.88);
-  border: 2px solid rgba(212, 175, 55, 0.85);
-  box-shadow:
-    0 4px 18px rgba(0, 0, 0, 0.55),
-    0 0 22px rgba(212, 175, 55, 0.45);
-  overflow: hidden;
+  padding: 6%;
+  background: radial-gradient(circle, rgba(4, 10, 24, 0.35) 0%, transparent 70%);
+  z-index: 2;
 }
-
-@media (min-width: 640px) {
-  .spin-globe__logo-face {
-    width: 118px;
-    height: 118px;
-    margin-left: -59px;
-    margin-top: -59px;
-    padding: 12px;
-  }
-}
-
-.spin-globe__logo-face--0 { transform: rotateY(0deg) translateZ(var(--globe-r)); }
 
 .spin-globe__logo-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
+  filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.55));
 }
 
-.spin-globe--static .spin-globe__ball {
-  transform: rotateX(-12deg) rotateY(-22deg);
+.spin-globe--static .spin-globe__stage {
+  transform: rotate(-8deg);
 }
 
-.hero-spotlight .spin-globe {
+.hero-spotlight .spin-globe,
+.globe-hero .spin-globe {
   position: relative;
   z-index: 2;
   flex-shrink: 0;
@@ -2004,28 +2015,15 @@ body {
 
 @media (max-width: 767px) {
   .spin-globe {
-    width: min(280px, 88vw);
-    height: min(300px, 94vw);
-  }
-
-  .spin-globe__ball {
-    width: 190px;
-    height: 190px;
-    --globe-r: 95px;
-  }
-
-  .spin-globe__logo-face {
-    width: 84px;
-    height: 84px;
-    margin-left: -42px;
-    margin-top: -42px;
-    padding: 8px;
+    width: min(320px, 90vw);
+    height: min(320px, 90vw);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spin-globe__ball {
-    transform: rotateX(-12deg) rotateY(-24deg) !important;
+  .spin-globe__glow,
+  .spin-globe__glow--gold {
+    animation: none !important;
   }
 }
 
@@ -3437,7 +3435,8 @@ body {
   .live-bg__grid,
   .live-bg__orb,
   .ticker-track,
-  .spin-globe__ball,
+  .spin-globe__glow,
+  .spin-globe__glow--gold,
   .bball-globe,
   .bball-scene__orbit,
   .bball-scene__ring,

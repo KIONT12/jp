@@ -1976,24 +1976,22 @@ function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
   if (staticLogo) {
     return (
       <div className="spin-globe spin-globe--static" role="img" aria-label="J. Parker Sports Agency globe">
-        <div className="spin-globe__ball">
+        <div className="spin-globe__stage">
           <div
             className="spin-globe__body"
             aria-hidden="true"
             style={{ backgroundImage: `url(${GLOBE_TEX})` }}
           />
           <div className="spin-globe__body-shade" aria-hidden="true" />
-          <div className="spin-globe__logos">
-            <div className="spin-globe__logo-face spin-globe__logo-face--0">
-              <Image
-                src={LOGO}
-                alt="J. Parker Sports Agency Management"
-                width={377}
-                height={445}
-                className="spin-globe__logo-img"
-                priority
-              />
-            </div>
+          <div className="spin-globe__logo-overlay">
+            <Image
+              src={LOGO}
+              alt="J. Parker Sports Agency Management"
+              width={377}
+              height={445}
+              className="spin-globe__logo-img"
+              priority
+            />
           </div>
         </div>
       </div>
@@ -2003,8 +2001,9 @@ function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
   return (
     <div className="spin-globe spin-globe--webgl">
       <div className="spin-globe__glow" aria-hidden="true" />
+      <div className="spin-globe__glow spin-globe__glow--gold" aria-hidden="true" />
       <div className="spin-globe__shadow" aria-hidden="true" />
-      <SpinningGlobe logoUrl={LOGO} className="spin-globe__canvas" />
+      <SpinningGlobe logoUrl={LOGO} globeUrl={GLOBE_TEX} className="spin-globe__canvas" />
     </div>
   );
 }
@@ -2152,6 +2151,11 @@ export default function Home() {
       {/* HOME */}
       {activeTab === "home" && (
         <div className={liteMode ? "" : "page-enter"}>
+          {/* Standalone glowing globe — freestanding, not boxed */}
+          <div className="globe-hero globe-hero--bleed">
+            <HeroLogo staticLogo={!show3DGlobe} />
+          </div>
+
           {/* ① AGENT PARKER — main attraction */}
           <SectionBlock
             id="founder"
@@ -2159,11 +2163,6 @@ export default function Home() {
             label="Our Founder"
             title="Agent Parker"
             className="agency-section--lead"
-            prepend={
-              <div className="leadership-globe hero-spotlight py-4 sm:py-8 mb-2 sm:mb-4">
-                <HeroLogo staticLogo={!show3DGlobe} />
-              </div>
-            }
           >
             <div className="mt-6 sm:mt-8 max-w-5xl">
               <LeaderProfileCard
