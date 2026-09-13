@@ -2005,12 +2005,8 @@ function FingerSpinBall() {
         />
       </div>
 
+      {/* Anchored to fingertip: bottom-center of ball sits on tip */}
       <div className="finger-spin__ball-anchor">
-        <div className="finger-spin__motion" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
         <div className="finger-spin__sphere">
           <div className="finger-spin__leather" />
           <div className="finger-spin__seams" aria-hidden="true">
@@ -2019,21 +2015,21 @@ function FingerSpinBall() {
             <span className="finger-spin__seam finger-spin__seam--c" />
             <span className="finger-spin__seam finger-spin__seam--d" />
           </div>
-          <div className="finger-spin__shine" aria-hidden="true" />
-          <div className="finger-spin__logos">
+          <div className="finger-spin__decals">
             {GLOBE_LOGO_FACES.map((deg, i) => (
-              <div key={deg} className={`finger-spin__panel finger-spin__panel--${deg}`}>
+              <div key={deg} className={`finger-spin__decal finger-spin__decal--${deg}`}>
                 <Image
                   src={LOGO_FULL}
                   alt={i === 0 ? "J. Parker Sports Agency Management" : ""}
                   width={377}
                   height={445}
-                  className="finger-spin__panel-img"
+                  className="finger-spin__decal-img"
                   priority={i === 0}
                 />
               </div>
             ))}
           </div>
+          <div className="finger-spin__shine" aria-hidden="true" />
         </div>
       </div>
     </div>
