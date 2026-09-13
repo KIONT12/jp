@@ -1965,8 +1965,9 @@ function SectionBlock({
   );
 }
 
-const BALL_LOGO_FACES = [0, 72, 144, 216, 288] as const;
-const FINGER_SPIN_HAND = "/images/hero/jp-woman-hand-v2.png";
+const BALL_LOGO_FACES = [0, 180] as const;
+const FINGER_SPIN_HAND = "/images/hero/jp-brand-hand.png";
+const LOGO_BADGE = "/images/logos/jpsa-logo.png";
 
 function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
   if (staticLogo) {
@@ -1989,51 +1990,50 @@ function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
 function FingerSpinBall() {
   return (
     <div
-      className="finger-spin"
+      className="brand-spin"
       role="img"
-      aria-label="Live 3D basketball with J. Parker Sports Agency logo spinning on a fingertip"
+      aria-label="3D basketball with J. Parker Sports Agency logo spinning on a fingertip"
     >
-      <div className="finger-spin__glow" aria-hidden="true" />
-      <div className="finger-spin__stage">
-        <div className="finger-spin__hand-wrap">
-          <Image
-            src={FINGER_SPIN_HAND}
-            alt=""
-            width={900}
-            height={900}
-            className="finger-spin__hand"
-            priority
-          />
-        </div>
+      <div className="brand-spin__halo" aria-hidden="true" />
 
-        <div className="finger-spin__ball-anchor">
-          <div className="finger-spin__sphere">
-            <div className="finger-spin__leather" />
-            <div className="finger-spin__seams" aria-hidden="true">
-              <span className="finger-spin__seam finger-spin__seam--a" />
-              <span className="finger-spin__seam finger-spin__seam--b" />
-              <span className="finger-spin__seam finger-spin__seam--c" />
-              <span className="finger-spin__seam finger-spin__seam--d" />
+      <div className="brand-spin__compose">
+        <Image
+          src={FINGER_SPIN_HAND}
+          alt=""
+          width={900}
+          height={900}
+          className="brand-spin__hand"
+          priority
+        />
+
+        <div className="brand-spin__ball-seat">
+          <div className="brand-spin__ball">
+            <div className="brand-spin__leather" />
+            <div className="brand-spin__seams" aria-hidden="true">
+              <span className="brand-spin__seam brand-spin__seam--a" />
+              <span className="brand-spin__seam brand-spin__seam--b" />
+              <span className="brand-spin__seam brand-spin__seam--c" />
+              <span className="brand-spin__seam brand-spin__seam--d" />
             </div>
-            <div className="finger-spin__decals">
+            <div className="brand-spin__badges">
               {BALL_LOGO_FACES.map((deg, i) => (
                 <div
                   key={deg}
-                  className="finger-spin__decal"
-                  style={{ transform: `rotateY(${deg}deg) translateZ(var(--decal-r))` }}
+                  className="brand-spin__badge"
+                  style={{ transform: `rotateY(${deg}deg) translateZ(var(--badge-r))` }}
                 >
                   <Image
-                    src={LOGO_FULL}
+                    src={LOGO_BADGE}
                     alt={i === 0 ? "J. Parker Sports Agency Management" : ""}
                     width={377}
                     height={445}
-                    className="finger-spin__decal-img"
+                    className="brand-spin__badge-img"
                     priority={i === 0}
                   />
                 </div>
               ))}
             </div>
-            <div className="finger-spin__shine" aria-hidden="true" />
+            <div className="brand-spin__gloss" aria-hidden="true" />
           </div>
         </div>
       </div>
