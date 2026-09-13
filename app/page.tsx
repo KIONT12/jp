@@ -58,6 +58,17 @@ const SERVICES = [
 const JPSA_TAGLINE = "Empowering the Game. Elevating the Player.";
 const SITE_UPDATED = "September 13, 2026";
 
+const HOME_SUCCESS_PROMO = {
+  title: "My Next Article Reveals J. Parker’s Success So Far",
+  eyebrow: "Stay Tuned · The Next Chapter Is Here",
+  summary:
+    "From NBA pros to college standouts — journeys, accomplishments, and the athletes J. Parker Sports Agency proudly represents.",
+  image: "/images/promo/jpsa-success-next-chapter.jpg",
+  imageAlt:
+    "J. Parker Sports Agency success feature teaser highlighting Isaiah Todd, Javion Belle McCrary, and Sydney Bolden",
+  athletes: ["Isaiah Todd · NBA Forward", "Javion Belle McCrary · Guard", "Sydney Bolden · Guard"],
+};
+
 const AGAINST_THE_ODDS_BOOK = {
   title: "Against the Odds",
   subtitle: "No Seat at the Table, So I Built My Own",
@@ -2192,8 +2203,53 @@ export default function Home() {
             </div>
           </SectionBlock>
 
-          {/* ② THE AGENCY */}
-          <SectionBlock id="agency" number="02" label="The Agency" title="J. Parker Sports Agency">
+          {/* Featured success teaser */}
+          <SectionBlock
+            id="success-spotlight"
+            number="02"
+            label="Next Chapter"
+            title="J. Parker’s Success So Far"
+          >
+            <p className="text-zinc-400 text-sm sm:text-base mt-4 max-w-2xl">
+              {HOME_SUCCESS_PROMO.summary}
+            </p>
+            <p className="text-xs text-gold-hot tracking-[0.18em] uppercase mt-3">
+              {HOME_SUCCESS_PROMO.eyebrow}
+            </p>
+            <figure className="home-promo mt-8 sm:mt-10">
+              <Image
+                src={HOME_SUCCESS_PROMO.image}
+                alt={HOME_SUCCESS_PROMO.imageAlt}
+                width={1086}
+                height={1448}
+                sizes="(max-width: 768px) 100vw, 720px"
+                className="home-promo__img"
+                loading="lazy"
+              />
+              <figcaption className="home-promo__caption">
+                {HOME_SUCCESS_PROMO.athletes.join(" · ")}
+              </figcaption>
+            </figure>
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-6">
+              <button
+                type="button"
+                onClick={() => switchTab("players")}
+                className="gold-bar px-6 sm:px-8 py-3.5 min-h-12 font-display font-bold text-sm uppercase tracking-widest hover:brightness-110 transition w-full sm:w-auto"
+              >
+                View the Roster
+              </button>
+              <button
+                type="button"
+                onClick={() => switchTab("about", "against-the-odds")}
+                className="outline-btn px-6 sm:px-8 py-3.5 min-h-12 font-display font-bold text-sm uppercase tracking-widest text-white w-full sm:w-auto"
+              >
+                Against the Odds — The Book
+              </button>
+            </div>
+          </SectionBlock>
+
+          {/* ③ THE AGENCY */}
+          <SectionBlock id="agency" number="03" label="The Agency" title="J. Parker Sports Agency">
             <div className="mt-6 sm:mt-8 space-y-8 sm:space-y-10">
               <div>
                 <p className="font-display brand-gradient-text text-sm sm:text-base tracking-[0.1em] uppercase mb-4">

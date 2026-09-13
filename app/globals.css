@@ -547,6 +547,32 @@ body {
   border-left: 2px solid rgba(196, 30, 58, 0.55);
 }
 
+.home-promo {
+  max-width: 42rem;
+  margin-inline: auto;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid rgba(196, 30, 58, 0.35);
+  background: rgba(0, 0, 0, 0.35);
+  line-height: 0;
+}
+
+.home-promo__img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.home-promo__caption {
+  padding: 0.85rem 1rem 1rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  line-height: 1.4;
+  background: rgba(10, 15, 24, 0.92);
+}
+
 @media (min-width: 640px) {
   .leader-photo-cover {
     height: 460px;
