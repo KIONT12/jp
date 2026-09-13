@@ -3168,16 +3168,8 @@ body {
     transform: none;
   }
 
-  .logo-float,
-  .bball-globe,
-  .bball-scene__orbit,
-  .bball-scene__ring,
-  .bball-scene__shadow {
+  .logo-float {
     animation: none !important;
-  }
-
-  .bball-globe {
-    transform: rotateX(-16deg) rotateY(-30deg) !important;
   }
 
   .ticker-track {
@@ -3189,6 +3181,20 @@ body {
   .mobile-dock,
   .resume-modal__backdrop {
     backdrop-filter: none;
+  }
+}
+
+/* Phones only: freeze 3D globe for smooth scrolling */
+@media (max-width: 767px) {
+  .bball-globe,
+  .bball-scene__orbit,
+  .bball-scene__ring,
+  .bball-scene__shadow {
+    animation: none !important;
+  }
+
+  .bball-globe {
+    transform: rotateX(-16deg) rotateY(-30deg) !important;
   }
 }
 

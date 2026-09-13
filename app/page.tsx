@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { FormEvent, ReactNode, useEffect, useState } from "react";
-import { useIsMobile, usePerformanceMode } from "./hooks/use-mobile";
+import { useIsMobile, usePerformanceMode, useShow3DGlobe } from "./hooks/use-mobile";
 
 const LOGO = "/images/logos/jpsa-logo.png";
 const LOGO_FULL = LOGO;
@@ -56,6 +56,7 @@ const SERVICES = [
 ];
 
 const JPSA_TAGLINE = "Empowering the Game. Elevating the Player.";
+const SITE_UPDATED = "September 13, 2026";
 
 const JPSA_BIO = [
   "J. Parker Sports Agency Management (JPSA) represents and develops elite women's basketball athletes across the WNBA and international markets. Founded on integrity, innovation, and athlete empowerment — management that goes far beyond the court.",
@@ -1951,6 +1952,7 @@ export default function Home() {
   const [activeResumePlayer, setActiveResumePlayer] = useState<RosterPlayer | null>(null);
   const isMobile = useIsMobile(1024);
   const liteMode = usePerformanceMode(1280);
+  const show3DGlobe = useShow3DGlobe(768);
   const animateText = !liteMode;
 
   function openPlayerResume(player: RosterPlayer) {
@@ -2097,7 +2099,7 @@ export default function Home() {
             className="agency-section--lead"
             prepend={
               <div className="leadership-globe hero-spotlight py-4 sm:py-8 mb-2 sm:mb-4">
-                <HeroLogo staticLogo={liteMode} />
+                <HeroLogo staticLogo={!show3DGlobe} />
               </div>
             }
           >
@@ -2815,6 +2817,9 @@ export default function Home() {
             />
             <span className="font-display text-xs tracking-[0.15em] uppercase text-zinc-500">
               © 2026 J. Parker Sports Agency
+              <span className="block sm:inline sm:before:content-['·_'] text-zinc-600 normal-case tracking-normal mt-1 sm:mt-0">
+                Updated {SITE_UPDATED}
+              </span>
             </span>
           </div>
           <a
