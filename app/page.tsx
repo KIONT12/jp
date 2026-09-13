@@ -1,14 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { FormEvent, ReactNode, useEffect, useState } from "react";
 import { useIsMobile, usePerformanceMode, useShow3DGlobe } from "./hooks/use-mobile";
+
+const SpinningGlobe = dynamic(() => import("./components/SpinningGlobe"), {
+  ssr: false,
+  loading: () => <div className="spin-globe spin-globe--loading" aria-hidden="true" />,
+});
 
 const LOGO = "/images/logos/jpsa-logo.png";
 const LOGO_FULL = LOGO;
 const GLOBE_TEX = "/images/globe/glow-sphere.webp";
-/** Logo plaques around the sphere so the brand stays on the globe while it spins */
-const GLOBE_LOGO_FACES = [0, 90, 180, 270] as const;
 const FOUNDER_PHOTO = "/images/team/j-parker.jpg";
 const WAYNE_PHOTO = "/images/team/wayne-wooten-headshot.jpg";
 const MUSA_PHOTO = "/images/team/musa-shabazz.png";
@@ -1995,41 +1999,12 @@ function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
       </div>
     );
   }
-  return <BasketballGlobe />;
-}
 
-function BasketballGlobe() {
   return (
-    <div className="spin-globe" role="img" aria-label="Live 3D spinning globe with J. Parker Sports Agency logo">
+    <div className="spin-globe spin-globe--webgl">
       <div className="spin-globe__glow" aria-hidden="true" />
       <div className="spin-globe__shadow" aria-hidden="true" />
-      <div className="spin-globe__orbit">
-        <div className="spin-globe__ball">
-          {/* Full sphere volume — textured body + logo plaques on the surface */}
-          <div
-            className="spin-globe__body"
-            aria-hidden="true"
-            style={{ backgroundImage: `url(${GLOBE_TEX})` }}
-          />
-          <div className="spin-globe__body-shade" aria-hidden="true" />
-          <div className="spin-globe__body-shine" aria-hidden="true" />
-
-          <div className="spin-globe__logos">
-            {GLOBE_LOGO_FACES.map((deg, i) => (
-              <div key={deg} className={`spin-globe__logo-face spin-globe__logo-face--${deg}`}>
-                <Image
-                  src={LOGO}
-                  alt={i === 0 ? "J. Parker Sports Agency Management" : ""}
-                  width={377}
-                  height={445}
-                  className="spin-globe__logo-img"
-                  priority={i === 0}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <SpinningGlobe logoUrl={LOGO} className="spin-globe__canvas" />
     </div>
   );
 }
