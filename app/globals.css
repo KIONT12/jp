@@ -1824,88 +1824,145 @@ body {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* ─── GLOW GLOBE — user's ornate glowing globe photo + logo (no Saturn rings) ─── */
-.glow-globe {
+/* ─── SPIN GLOBE — glowing sphere only, 3D spin + logo (no rings, no pedestal) ─── */
+.spin-globe {
   position: relative;
-  width: min(300px, 88vw);
+  width: min(280px, 84vw);
+  height: min(300px, 88vw);
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  perspective: 1200px;
+  perspective-origin: 50% 45%;
 }
 
 @media (min-width: 640px) {
-  .glow-globe {
-    width: min(360px, 42vw);
+  .spin-globe {
+    width: 340px;
+    height: 360px;
   }
 }
 
-.glow-globe__stage {
-  position: relative;
-  width: 100%;
-  line-height: 0;
-  border-radius: 1rem;
-  overflow: hidden;
-  transform-origin: center center;
-  box-shadow:
-    0 0 40px rgba(212, 175, 55, 0.22),
-    0 0 80px rgba(30, 80, 160, 0.2),
-    0 24px 48px rgba(0, 0, 0, 0.55);
-}
-
-.glow-globe:not(.glow-globe--static) .glow-globe__stage {
-  animation: glow-globe-live 14s ease-in-out infinite;
-}
-
-@keyframes glow-globe-live {
-  0%, 100% {
-    transform: perspective(900px) rotateY(-6deg) rotateX(2deg) translateY(0);
-  }
-  50% {
-    transform: perspective(900px) rotateY(6deg) rotateX(-1deg) translateY(-6px);
-  }
-}
-
-.glow-globe__photo {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-
-/* Logo fitted on the glowing globe area (upper sphere in the photo) */
-.glow-globe__logo {
+.spin-globe__glow {
   position: absolute;
+  inset: 12% 8%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(212, 175, 55, 0.28) 0%, transparent 48%),
+    radial-gradient(circle, rgba(40, 100, 200, 0.3) 0%, transparent 65%);
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.spin-globe__shadow {
+  position: absolute;
+  bottom: 10px;
   left: 50%;
-  top: 34%;
-  transform: translate(-50%, -50%);
-  width: 32%;
-  max-width: 120px;
-  aspect-ratio: 1;
+  width: 58%;
+  height: 18px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55) 0%, transparent 70%);
+  filter: blur(8px);
+  z-index: 0;
+}
+
+.spin-globe__orbit {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6%;
-  box-sizing: border-box;
+  transform-style: preserve-3d;
+  z-index: 1;
+}
+
+.spin-globe__ball {
+  position: relative;
+  width: 210px;
+  height: 210px;
+  transform-style: preserve-3d;
+  animation: spin-globe-rotate 14s linear infinite;
+  --logo-r: 106px;
+}
+
+@media (min-width: 640px) {
+  .spin-globe__ball {
+    width: 250px;
+    height: 250px;
+    --logo-r: 126px;
+  }
+}
+
+@keyframes spin-globe-rotate {
+  from { transform: rotateX(-14deg) rotateY(0deg); }
+  to { transform: rotateX(-14deg) rotateY(360deg); }
+}
+
+.spin-globe__skin {
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
-  background: rgba(6, 10, 22, 0.55);
+  overflow: hidden;
+  transform: translateZ(0);
+  box-shadow:
+    inset -16px -20px 36px rgba(0, 0, 0, 0.45),
+    inset 10px 12px 24px rgba(255, 220, 140, 0.12),
+    0 0 28px rgba(40, 100, 200, 0.35),
+    0 0 48px rgba(212, 175, 55, 0.18),
+    0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+.spin-globe__tex {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.spin-globe__logos {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  z-index: 3;
+}
+
+.spin-globe__logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 48%;
+  height: 48%;
+  margin-left: -24%;
+  margin-top: -24%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 8%;
+  box-sizing: border-box;
+  background: rgba(4, 10, 24, 0.58);
   border: 1px solid rgba(212, 175, 55, 0.55);
   box-shadow:
     0 0 16px rgba(212, 175, 55, 0.35),
-    inset 0 0 10px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(2px);
-  z-index: 2;
+    inset 0 0 12px rgba(0, 0, 0, 0.45);
+  backface-visibility: hidden;
 }
 
-@media (min-width: 640px) {
-  .glow-globe__logo {
-    width: 30%;
-    max-width: 130px;
-    top: 33%;
-  }
+.spin-globe__logo--0,
+.spin-globe__logo--front {
+  transform: rotateY(0deg) translateZ(var(--logo-r));
+  backface-visibility: hidden;
 }
 
-.glow-globe__logo-img {
+.spin-globe__logo--180 {
+  transform: rotateY(180deg) translateZ(var(--logo-r));
+  backface-visibility: hidden;
+}
+
+.spin-globe__logo-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -1913,25 +1970,57 @@ body {
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
 }
 
-.glow-globe--static .glow-globe__stage {
+.spin-globe--static .spin-globe__ball {
   animation: none;
+  transform: rotateX(-10deg) rotateY(-20deg);
 }
 
-.hero-spotlight .glow-globe {
+.spin-globe--static .spin-globe__logo--front {
+  transform: none;
+  left: 50%;
+  top: 50%;
+  z-index: 4;
+}
+
+.hero-spotlight .spin-globe {
   position: relative;
   z-index: 2;
   flex-shrink: 0;
 }
 
+@media (max-width: 767px) {
+  .spin-globe {
+    width: min(240px, 80vw);
+    height: min(260px, 86vw);
+  }
+
+  .spin-globe__ball {
+    width: 180px;
+    height: 180px;
+    --logo-r: 91px;
+    animation-duration: 16s;
+  }
+
+  .spin-globe__logo {
+    width: 46%;
+    height: 46%;
+    margin-left: -23%;
+    margin-top: -23%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .glow-globe__stage {
+  .spin-globe__ball {
     animation: none !important;
+    transform: rotateX(-10deg) rotateY(-24deg) !important;
   }
 }
 
 .live-bg--lite .live-bg__aurora {
   animation: none;
 }
+
+
 
 
 
@@ -3232,19 +3321,6 @@ body {
   }
 }
 
-/* Phones: keep the photo globe readable */
-@media (max-width: 767px) {
-  .glow-globe {
-    width: min(260px, 86vw);
-  }
-
-  .glow-globe__logo {
-    width: 34%;
-    max-width: 96px;
-    top: 34%;
-  }
-}
-
 
 /* Mobile layout tweaks */
 @media (max-width: 767px) {
@@ -3346,7 +3422,7 @@ body {
   .live-bg__grid,
   .live-bg__orb,
   .ticker-track,
-  .glow-globe__stage,
+  .spin-globe__ball,
   .bball-globe,
   .bball-scene__orbit,
   .bball-scene__ring,

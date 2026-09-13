@@ -6,7 +6,8 @@ import { useIsMobile, usePerformanceMode, useShow3DGlobe } from "./hooks/use-mob
 
 const LOGO = "/images/logos/jpsa-logo.png";
 const LOGO_FULL = LOGO;
-const GLOBE_TEX = "/images/globe/glow-globe.webp";
+const GLOBE_TEX = "/images/globe/glow-sphere.webp";
+const GLOBE_LOGO_FACES = [0, 180] as const;
 const FOUNDER_PHOTO = "/images/team/j-parker.jpg";
 const WAYNE_PHOTO = "/images/team/wayne-wooten-headshot.jpg";
 const MUSA_PHOTO = "/images/team/musa-shabazz.png";
@@ -57,7 +58,7 @@ const SERVICES = [
 ];
 
 const JPSA_TAGLINE = "Empowering the Game. Elevating the Player.";
-const SITE_UPDATED = "September 13, 2026 · Glow Globe";
+const SITE_UPDATED = "September 13, 2026 · Spin Globe";
 
 const HOME_SUCCESS_PROMO = {
   title: "My Next Article Reveals J. Parker’s Success So Far",
@@ -1967,39 +1968,68 @@ function SectionBlock({
 }
 
 function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
+  if (staticLogo) {
+    return (
+      <div className="spin-globe spin-globe--static" role="img" aria-label="J. Parker Sports Agency globe">
+        <div className="spin-globe__ball">
+          <div className="spin-globe__skin">
+            <Image src={GLOBE_TEX} alt="" width={900} height={900} className="spin-globe__tex" priority />
+          </div>
+          <div className="spin-globe__logo spin-globe__logo--front">
+            <Image
+              src={LOGO}
+              alt="J. Parker Sports Agency Management"
+              width={377}
+              height={445}
+              className="spin-globe__logo-img"
+              priority
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  return <BasketballGlobe />;
+}
+
+function BasketballGlobe() {
   return (
-    <div
-      className={`glow-globe${staticLogo ? " glow-globe--static" : ""}`}
-      role="img"
-      aria-label="J. Parker Sports Agency glowing globe"
-    >
-      <div className="glow-globe__stage">
-        <Image
-          src={GLOBE_TEX}
-          alt="Illuminated globe"
-          width={900}
-          height={1150}
-          className="glow-globe__photo"
-          sizes="(max-width: 640px) 280px, 340px"
-          priority
-        />
-        <div className="glow-globe__logo">
-          <Image
-            src={LOGO}
-            alt="J. Parker Sports Agency Management"
-            width={377}
-            height={445}
-            className="glow-globe__logo-img"
-            priority
-          />
+    <div className="spin-globe" role="img" aria-label="Live 3D spinning globe with J. Parker Sports Agency logo">
+      <div className="spin-globe__glow" aria-hidden="true" />
+      <div className="spin-globe__shadow" aria-hidden="true" />
+      <div className="spin-globe__orbit">
+        <div className="spin-globe__ball">
+          <div className="spin-globe__skin">
+            <Image
+              src={GLOBE_TEX}
+              alt=""
+              width={900}
+              height={900}
+              className="spin-globe__tex"
+              priority
+            />
+          </div>
+          <div className="spin-globe__logos">
+            {GLOBE_LOGO_FACES.map((deg, i) => (
+              <div
+                key={deg}
+                className={`spin-globe__logo spin-globe__logo--${deg}`}
+              >
+                <Image
+                  src={LOGO}
+                  alt={i === 0 ? "J. Parker Sports Agency Management" : ""}
+                  width={377}
+                  height={445}
+                  className="spin-globe__logo-img"
+                  priority={i === 0}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
-}
-
-function BasketballGlobe() {
-  return <HeroLogo />;
 }
 
 export default function Home() {
