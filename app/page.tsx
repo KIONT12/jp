@@ -547,6 +547,51 @@ const ROSTER: RosterPlayer[] = [
     },
   },
   {
+    num: "04",
+    name: "Julian Brown",
+    position: "Professional Basketball Player",
+    detail: "University of Virginia · #4",
+    image: "/images/players/julian-brown.jpg",
+    signed: true,
+    resume: {
+      summary:
+        "Professional basketball player signed to J. Parker Sports Agency Management. JPSA is proud to represent Julian Brown’s talent, support the journey, and help reach new heights both on and off the court.",
+      metrics: [
+        { label: "Level", value: "Professional" },
+        { label: "Jersey", value: "#04" },
+        { label: "School", value: "University of Virginia" },
+        { label: "Status", value: "Signed · JPSA" },
+      ],
+      experience: [
+        {
+          role: "Basketball Player",
+          team: "University of Virginia",
+          detail:
+            "Competed in the ACC — talent meets opportunity with J. Parker Sports Agency Management representation.",
+        },
+        {
+          role: "Signed Athlete",
+          team: "J. Parker Sports Agency Management",
+          detail:
+            "Client signed — represent, develop, and build for big dreams and bigger plans.",
+        },
+      ],
+      skills: [
+        "Scoring",
+        "Athleticism",
+        "Competitiveness",
+        "Brand Building",
+        "Career Development",
+        "Global Opportunities",
+      ],
+      highlights: [
+        "Client signed · Welcome to the team",
+        "More than a game… it’s a movement",
+        "Big dreams. Bigger plans. #JPSM",
+      ],
+    },
+  },
+  {
     num: "07",
     name: "Jamani Pierce",
     position: "Combo Guard",
