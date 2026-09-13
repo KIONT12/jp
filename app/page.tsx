@@ -56,7 +56,7 @@ const SERVICES = [
 ];
 
 const JPSA_TAGLINE = "Empowering the Game. Elevating the Player.";
-const SITE_UPDATED = "September 13, 2026";
+const SITE_UPDATED = "September 13, 2026 · Logo Globe";
 
 const HOME_SUCCESS_PROMO = {
   title: "My Next Article Reveals J. Parker’s Success So Far",
@@ -2040,7 +2040,7 @@ export default function Home() {
   const [activeResumePlayer, setActiveResumePlayer] = useState<RosterPlayer | null>(null);
   const isMobile = useIsMobile(1024);
   const liteMode = usePerformanceMode(1280);
-  const show3DGlobe = useShow3DGlobe(768);
+  const show3DGlobe = useShow3DGlobe();
   const animateText = !liteMode;
 
   function openPlayerResume(player: RosterPlayer) {

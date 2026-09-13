@@ -56,29 +56,19 @@ export function usePerformanceMode(breakpoint = 1280) {
 }
 
 /**
- * 3D basketball globe: show on tablets + desktop.
- * Hide only on phones and when the user prefers reduced motion.
+ * 3D basketball globe: show everywhere except reduced-motion preference.
+ * Phones get a lighter CSS variant; they still see the globe.
  */
-export function useShow3DGlobe(phoneBreakpoint = 768) {
-  const [show3D, setShow3D] = useState(false);
+export function useShow3DGlobe() {
+  const [show3D, setShow3D] = useState(true);
 
   useEffect(() => {
-    const phoneMq = window.matchMedia(`(max-width: ${phoneBreakpoint - 1}px)`);
     const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    const update = () => {
-      setShow3D(!phoneMq.matches && !motionMq.matches);
-    };
-
+    const update = () => setShow3D(!motionMq.matches);
     update();
-    phoneMq.addEventListener("change", update);
     motionMq.addEventListener("change", update);
-
-    return () => {
-      phoneMq.removeEventListener("change", update);
-      motionMq.removeEventListener("change", update);
-    };
-  }, [phoneBreakpoint]);
+    return () => motionMq.removeEventListener("change", update);
+  }, []);
 
   return show3D;
 }

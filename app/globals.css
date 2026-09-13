@@ -1897,11 +1897,11 @@ body {
 .logo-globe__ring--main {
   width: 122%;
   height: 122%;
-  border: 2px solid rgba(255, 72, 82, 0.7);
+  border: 2.5px solid rgba(255, 60, 70, 0.85);
   box-shadow:
-    0 0 18px rgba(196, 30, 58, 0.5),
-    0 0 4px rgba(255, 160, 100, 0.35),
-    inset 0 0 12px rgba(196, 30, 58, 0.2);
+    0 0 24px rgba(196, 30, 58, 0.65),
+    0 0 6px rgba(255, 180, 100, 0.45),
+    inset 0 0 14px rgba(196, 30, 58, 0.25);
   transform: rotateX(76deg);
   animation: logo-globe-ring 18s linear infinite;
 }
@@ -3398,14 +3398,40 @@ body {
   }
 }
 
-/* Phones only: freeze 3D globe for smooth scrolling */
+/* Phones: keep the globe visible, use a lighter spin (still clearly 3D) */
 @media (max-width: 767px) {
-  .logo-globe__rig,
-  .logo-globe__ball,
-  .logo-globe__ring,
-  .logo-globe__floor,
-  .logo-globe__spec,
-  .logo-globe__halo,
+  .logo-globe {
+    width: min(240px, 78vw);
+    height: min(270px, 86vw);
+  }
+
+  .logo-globe__ball {
+    width: 168px;
+    height: 168px;
+    --badge-r: 86px;
+    animation-duration: 18s;
+  }
+
+  .logo-globe__badge {
+    width: 72px;
+    height: 88px;
+    margin-left: -36px;
+    margin-top: -44px;
+  }
+
+  .logo-globe__ring--fine,
+  .logo-globe__world {
+    display: none;
+  }
+
+  .logo-globe__ring--main {
+    animation-duration: 24s;
+  }
+
+  .logo-globe__rig {
+    animation-duration: 16s;
+  }
+
   .bball-globe,
   .bball-scene__orbit,
   .bball-scene__ring,
@@ -3416,12 +3442,10 @@ body {
     animation: none !important;
   }
 
-  .logo-globe__ball,
   .bball-globe {
     transform: rotateX(-14deg) rotateY(-28deg) !important;
   }
 
-  .logo-globe__world,
   .tech-globe__scan {
     display: none;
   }
