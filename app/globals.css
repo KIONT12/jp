@@ -187,9 +187,7 @@ body {
   padding: 1rem 0 2rem;
 }
 
-.hero-spotlight .bball-scene,
-.hero-spotlight .spin-globe,
-.hero-spotlight .world-ball {
+.hero-spotlight .bball-scene {
   position: relative;
   z-index: 2;
   flex-shrink: 0;
@@ -1826,178 +1824,184 @@ body {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* ─── SPIN GLOBE — freestanding WebGL sphere ─── */
-.spin-globe {
+/* ─── 3D BASKETBALL GLOBE (original) ─── */
+.bball-scene {
   position: relative;
-  width: min(360px, 92vw);
-  height: min(360px, 92vw);
+  width: 260px;
+  height: 300px;
   margin: 0 auto;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  overflow: visible;
+  perspective: 1100px;
+  perspective-origin: 50% 42%;
 }
 
 @media (min-width: 640px) {
-  .spin-globe {
-    width: 440px;
-    height: 440px;
+  .bball-scene {
+    width: 320px;
+    height: 360px;
   }
 }
 
-@media (min-width: 1024px) {
-  .spin-globe {
-    width: 520px;
-    height: 520px;
-  }
-}
-
-.spin-globe--webgl {
-  perspective: none;
-}
-
-.spin-globe--loading {
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 35% 30%, rgba(80, 140, 255, 0.3), transparent 45%),
-    radial-gradient(circle at 50% 52%, #0b2a6e 0%, #040b18 70%);
-  box-shadow:
-    0 0 60px rgba(40, 110, 210, 0.45),
-    0 0 100px rgba(212, 175, 55, 0.2);
-}
-
-.spin-globe__canvas {
+.bball-scene__shadow {
   position: absolute;
-  inset: 0;
-  z-index: 2;
-  border-radius: 50%;
-}
-
-.spin-globe__canvas canvas {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.spin-globe__glow {
-  position: absolute;
-  inset: -8%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(60, 130, 255, 0.45) 0%, transparent 58%);
-  filter: blur(28px);
-  pointer-events: none;
-  z-index: 0;
-  animation: globe-glow-pulse 4.5s ease-in-out infinite;
-}
-
-.spin-globe__glow--gold {
-  inset: -2%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.38) 0%, transparent 52%);
-  filter: blur(34px);
-  animation-delay: -2s;
-}
-
-@keyframes globe-glow-pulse {
-  0%, 100% { opacity: 0.75; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.06); }
-}
-
-.spin-globe__shadow {
-  position: absolute;
-  bottom: 2%;
+  bottom: 8px;
   left: 50%;
-  width: 58%;
-  height: 18px;
+  width: 68%;
+  height: 22px;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55) 0%, transparent 72%);
-  filter: blur(10px);
-  z-index: 0;
+  background: radial-gradient(ellipse, rgba(196, 30, 58, 0.18) 0%, transparent 70%);
+  filter: blur(8px);
+  animation: shadow-pulse 4s ease-in-out infinite;
 }
 
-.spin-globe__stage {
-  position: absolute;
-  inset: 8%;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow:
-    0 0 50px rgba(40, 110, 210, 0.45),
-    0 0 90px rgba(212, 175, 55, 0.22);
+@keyframes shadow-pulse {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+  50% { transform: translateX(-50%) scale(0.88); opacity: 0.45; }
 }
 
-.spin-globe__body {
+.bball-scene__orbit {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  background-color: #061428;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.spin-globe__body-shade {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 30% 24%, rgba(180, 210, 255, 0.28) 0%, transparent 30%),
-    radial-gradient(circle at 72% 78%, rgba(0, 8, 28, 0.72) 0%, transparent 46%),
-    radial-gradient(circle at 50% 50%, transparent 52%, rgba(0, 0, 0, 0.45) 100%);
-}
-
-.spin-globe__logo-overlay {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 58%;
-  height: 58%;
-  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
+  transform-style: preserve-3d;
+  animation: orbit-tilt 9s ease-in-out infinite alternate;
+}
+
+@keyframes orbit-tilt {
+  0% { transform: rotateX(8deg) rotateZ(-2deg); }
+  100% { transform: rotateX(14deg) rotateZ(2deg); }
+}
+
+.bball-scene__ring {
+  position: absolute;
+  width: 108%;
+  height: 108%;
+  border: 1px dashed rgba(196, 30, 58, 0.22);
   border-radius: 50%;
-  padding: 6%;
-  background: radial-gradient(circle, rgba(4, 10, 24, 0.35) 0%, transparent 70%);
-  z-index: 2;
+  transform: rotateX(72deg);
+  animation: ring-spin 22s linear infinite;
+  pointer-events: none;
 }
 
-.spin-globe__logo-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-  filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.55));
+.bball-scene__ring--2 {
+  width: 118%;
+  height: 118%;
+  border-color: rgba(165, 28, 36, 0.12);
+  animation-duration: 32s;
+  animation-direction: reverse;
 }
 
-.spin-globe--static .spin-globe__stage {
-  transform: rotate(-8deg);
+@keyframes ring-spin {
+  to { transform: rotateX(72deg) rotateZ(360deg); }
 }
 
-.hero-spotlight .spin-globe,
-.globe-hero .spin-globe {
+.bball-globe {
   position: relative;
-  z-index: 2;
-  flex-shrink: 0;
+  width: 220px;
+  height: 220px;
+  transform-style: preserve-3d;
+  animation: bball-spin 16s linear infinite;
+  --globe-r: 108px;
 }
 
-@media (max-width: 767px) {
-  .spin-globe {
-    width: min(300px, 86vw);
-    height: min(300px, 86vw);
-  }
-
-  .spin-globe__glow,
-  .spin-globe__glow--gold {
-    filter: blur(18px);
+@media (min-width: 640px) {
+  .bball-globe {
+    width: 270px;
+    height: 270px;
+    --globe-r: 132px;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .spin-globe__glow,
-  .spin-globe__glow--gold {
-    animation: none !important;
+@keyframes bball-spin {
+  from { transform: rotateX(-16deg) rotateY(0deg); }
+  to { transform: rotateX(-16deg) rotateY(360deg); }
+}
+
+.bball-globe__body {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.09) 0%, transparent 28%),
+    radial-gradient(circle at 72% 78%, rgba(0, 0, 0, 0.55) 0%, transparent 38%),
+    radial-gradient(circle at 38% 32%, #3a3a3a 0%, #141414 42%, #050505 72%, #000 100%);
+  box-shadow:
+    inset -28px -32px 56px rgba(0, 0, 0, 0.85),
+    inset 14px 16px 28px rgba(196, 30, 58, 0.05),
+    0 0 70px rgba(196, 30, 58, 0.14),
+    0 18px 40px rgba(0, 0, 0, 0.55);
+}
+
+.bball-globe__body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 0.6px, transparent 0.6px);
+  background-size: 7px 7px;
+  opacity: 0.55;
+}
+
+.bball-globe__seams {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.bball-seam {
+  position: absolute;
+  inset: 2%;
+  border-radius: 50%;
+  border: 2.5px solid rgba(196, 30, 58, 0.42);
+  transform-style: preserve-3d;
+  box-shadow: 0 0 6px rgba(196, 30, 58, 0.15);
+}
+
+.bball-seam--1 { transform: rotateY(0deg); }
+.bball-seam--2 { transform: rotateY(60deg); }
+.bball-seam--3 { transform: rotateY(120deg); }
+.bball-seam--4 {
+  transform: rotateX(90deg) scaleX(0.92);
+  border-color: rgba(196, 30, 58, 0.28);
+}
+
+.bball-globe__logos {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.bball-logo-face {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 108px;
+  height: 132px;
+  margin-left: -54px;
+  margin-top: -66px;
+  backface-visibility: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8e8e8;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  border: 1px solid rgba(165, 28, 36, 0.35);
+}
+
+@media (min-width: 640px) {
+  .bball-logo-face {
+    width: 128px;
+    height: 156px;
+    margin-left: -64px;
+    margin-top: -78px;
   }
 }
+
+.bball-logo-face--0 { transform: rotateY(0deg) translateZ(var(--globe-r)); }
+.bball-logo-face--180 { transform: rotateY(180deg) translateZ(var(--globe-r)); }
 
 .live-bg--lite .live-bg__aurora {
   animation: none;
@@ -3296,10 +3300,27 @@ body {
   }
 }
 
-/* Phones: keep WebGL globe; drop leftover CSS globe animations */
+/* Phones: keep original globe spinning, just slower + drop orbit rings */
 @media (max-width: 767px) {
-  .finger-spin__motion {
+  .bball-scene {
+    width: min(240px, 78vw);
+    height: min(280px, 88vw);
+  }
+
+  .bball-globe {
+    width: 200px;
+    height: 200px;
+    --globe-r: 98px;
+    animation-duration: 22s;
+  }
+
+  .bball-scene__ring,
+  .bball-scene__ring--2 {
     display: none;
+  }
+
+  .bball-scene__orbit {
+    animation: none;
   }
 
   .world-ball__stage,
@@ -3307,17 +3328,8 @@ body {
   .world-ball__gyro,
   .world-ball__shadow,
   .world-ball__shine,
-  .world-ball__atmosphere,
-  .bball-globe,
-  .bball-scene__orbit,
-  .bball-scene__ring,
-  .bball-scene__shadow {
+  .world-ball__atmosphere {
     animation: none !important;
-  }
-
-  .world-ball__sphere,
-  .bball-globe {
-    transform: rotateX(-14deg) rotateY(-28deg) !important;
   }
 
   .world-ball__grid,
@@ -3426,25 +3438,13 @@ body {
   .live-bg__grid,
   .live-bg__orb,
   .ticker-track,
-  .spin-globe__glow,
-  .spin-globe__glow--gold,
-  .finger-spin__sphere,
-  .finger-spin__motion span,
-  .world-ball__stage,
-  .world-ball__sphere,
-  .world-ball__gyro,
-  .world-ball__shadow,
-  .world-ball__shine,
-  .world-ball__atmosphere,
   .bball-globe,
   .bball-scene__orbit,
   .bball-scene__ring,
   .bball-scene__shadow {
     animation: none !important;
   }
-  .finger-spin__sphere,
-  .world-ball__sphere,
   .bball-globe {
-    transform: rotateX(-18deg) rotateY(-40deg) !important;
+    transform: rotateX(-16deg) rotateY(-30deg) !important;
   }
 }
