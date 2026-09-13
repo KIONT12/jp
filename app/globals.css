@@ -188,7 +188,7 @@ body {
 }
 
 .hero-spotlight .bball-scene,
-.hero-spotlight .finger-spin,
+.hero-spotlight .spin-globe,
 .hero-spotlight .world-ball {
   position: relative;
   z-index: 2;
@@ -1826,211 +1826,177 @@ body {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* ─── BRAND SPIN — header-fit 3D ball on fingertip ─── */
-.brand-spin {
+/* ─── SPIN GLOBE — freestanding WebGL sphere ─── */
+.spin-globe {
   position: relative;
-  width: min(280px, 78vw);
-  height: min(300px, 84vw);
-  margin: 0.25rem auto 0.5rem;
-  perspective: 1000px;
+  width: min(360px, 92vw);
+  height: min(360px, 92vw);
+  margin: 0 auto;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
 }
 
 @media (min-width: 640px) {
-  .brand-spin {
-    width: 320px;
-    height: 340px;
+  .spin-globe {
+    width: 440px;
+    height: 440px;
   }
 }
 
-.brand-spin__halo {
-  position: absolute;
-  top: 6%;
-  left: 50%;
-  width: 58%;
-  height: 42%;
-  transform: translateX(-50%);
+@media (min-width: 1024px) {
+  .spin-globe {
+    width: 520px;
+    height: 520px;
+  }
+}
+
+.spin-globe--webgl {
+  perspective: none;
+}
+
+.spin-globe--loading {
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(165, 28, 36, 0.28) 0%, transparent 68%);
-  filter: blur(18px);
+    radial-gradient(circle at 35% 30%, rgba(80, 140, 255, 0.3), transparent 45%),
+    radial-gradient(circle at 50% 52%, #0b2a6e 0%, #040b18 70%);
+  box-shadow:
+    0 0 60px rgba(40, 110, 210, 0.45),
+    0 0 100px rgba(212, 175, 55, 0.2);
+}
+
+.spin-globe__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.spin-globe__canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.spin-globe__glow {
+  position: absolute;
+  inset: -8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(60, 130, 255, 0.45) 0%, transparent 58%);
+  filter: blur(28px);
   pointer-events: none;
+  z-index: 0;
+  animation: globe-glow-pulse 4.5s ease-in-out infinite;
+}
+
+.spin-globe__glow--gold {
+  inset: -2%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.38) 0%, transparent 52%);
+  filter: blur(34px);
+  animation-delay: -2s;
+}
+
+@keyframes globe-glow-pulse {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+.spin-globe__shadow {
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  width: 58%;
+  height: 18px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55) 0%, transparent 72%);
+  filter: blur(10px);
   z-index: 0;
 }
 
-.brand-spin__compose {
+.spin-globe__stage {
   position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.brand-spin__hand {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center 62%;
-  transform: scale(0.78);
-  transform-origin: center 70%;
-  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.55));
-  user-select: none;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/*
-  Hand tip ≈ 46.1% x, 19.3% y in source art.
-  With scale(0.78) origin 70%: map tip into compose space.
-  Using compose-relative seat tuned for scaled hand.
-*/
-.brand-spin__ball-seat {
-  position: absolute;
-  left: 47%;
-  top: 30.5%;
-  width: 118px;
-  height: 118px;
-  transform: translate(-50%, calc(-100% + 8px));
-  transform-style: preserve-3d;
-  z-index: 3;
-  perspective: 800px;
-}
-
-@media (min-width: 640px) {
-  .brand-spin__ball-seat {
-    width: 132px;
-    height: 132px;
-    top: 30%;
-  }
-}
-
-.brand-spin__ball {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  animation: brand-ball-spin 3.6s linear infinite;
-  --badge-r: 58px;
-}
-
-@media (min-width: 640px) {
-  .brand-spin__ball {
-    --badge-r: 65px;
-  }
-}
-
-@keyframes brand-ball-spin {
-  from { transform: rotateX(-18deg) rotateY(0deg); }
-  to { transform: rotateX(-18deg) rotateY(360deg); }
-}
-
-.brand-spin__leather {
-  position: absolute;
-  inset: 0;
+  inset: 8%;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 22%, rgba(255, 236, 210, 0.5) 0%, transparent 26%),
-    radial-gradient(circle at 74% 76%, rgba(70, 20, 5, 0.5) 0%, transparent 40%),
-    radial-gradient(circle at 48% 44%, #ef8b3c 0%, #d9651c 38%, #a84510 66%, #4f1e08 100%);
+  overflow: hidden;
   box-shadow:
-    inset -18px -22px 34px rgba(30, 8, 0, 0.72),
-    inset 12px 14px 22px rgba(255, 200, 130, 0.2),
-    0 10px 24px rgba(0, 0, 0, 0.45),
-    0 0 0 1px rgba(120, 40, 12, 0.35);
+    0 0 50px rgba(40, 110, 210, 0.45),
+    0 0 90px rgba(212, 175, 55, 0.22);
 }
 
-.brand-spin__leather::after {
-  content: "";
+.spin-globe__body {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background-image: radial-gradient(rgba(45, 16, 5, 0.3) 0.5px, transparent 0.5px);
-  background-size: 3.5px 3.5px;
-  opacity: 0.45;
-  -webkit-mask-image: radial-gradient(circle, black 52%, transparent 80%);
-  mask-image: radial-gradient(circle, black 52%, transparent 80%);
+  background-color: #061428;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.brand-spin__seams {
+.spin-globe__body-shade {
   position: absolute;
   inset: 0;
-  transform-style: preserve-3d;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.brand-spin__seam {
-  position: absolute;
-  inset: 3%;
   border-radius: 50%;
-  border: 2px solid rgba(18, 6, 3, 0.9);
-}
-
-.brand-spin__seam--a { transform: rotateY(0deg); }
-.brand-spin__seam--b { transform: rotateY(55deg); }
-.brand-spin__seam--c { transform: rotateY(110deg); }
-.brand-spin__seam--d {
-  transform: rotateX(90deg) scaleX(0.94);
-  border-color: rgba(18, 6, 3, 0.72);
-}
-
-/* Full logo badge printed on the ball (front + back) */
-.brand-spin__badges {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  z-index: 3;
   pointer-events: none;
+  background:
+    radial-gradient(circle at 30% 24%, rgba(180, 210, 255, 0.28) 0%, transparent 30%),
+    radial-gradient(circle at 72% 78%, rgba(0, 8, 28, 0.72) 0%, transparent 46%),
+    radial-gradient(circle at 50% 50%, transparent 52%, rgba(0, 0, 0, 0.45) 100%);
 }
 
-.brand-spin__badge {
+.spin-globe__logo-overlay {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 70%;
-  height: 70%;
-  margin-left: -35%;
-  margin-top: -35%;
-  border-radius: 50%;
-  overflow: hidden;
+  width: 58%;
+  height: 58%;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(8, 10, 14, 0.82);
-  border: 1px solid rgba(165, 28, 36, 0.55);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-    0 2px 8px rgba(0, 0, 0, 0.35);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  border-radius: 50%;
+  padding: 6%;
+  background: radial-gradient(circle, rgba(4, 10, 24, 0.35) 0%, transparent 70%);
+  z-index: 2;
 }
 
-.brand-spin__badge-img {
-  width: 92%;
-  height: 92%;
+.spin-globe__logo-img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   display: block;
+  filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.55));
 }
 
-.brand-spin__gloss {
-  position: absolute;
-  top: 10%;
-  left: 16%;
-  width: 34%;
-  height: 24%;
-  border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
-  filter: blur(1.2px);
-  z-index: 5;
-  pointer-events: none;
+.spin-globe--static .spin-globe__stage {
+  transform: rotate(-8deg);
 }
 
-.hero-spotlight .brand-spin,
-.hero-spotlight .finger-spin,
-.hero-spotlight .world-ball,
-.hero-spotlight .bball-scene {
+.hero-spotlight .spin-globe,
+.globe-hero .spin-globe {
   position: relative;
   z-index: 2;
   flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .spin-globe {
+    width: min(300px, 86vw);
+    height: min(300px, 86vw);
+  }
+
+  .spin-globe__glow,
+  .spin-globe__glow--gold {
+    filter: blur(18px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-globe__glow,
+  .spin-globe__glow--gold {
+    animation: none !important;
+  }
 }
 
 .live-bg--lite .live-bg__aurora {
@@ -3330,12 +3296,8 @@ body {
   }
 }
 
-/* Phones: keep brand-spin visible; lighten motion */
+/* Phones: keep WebGL globe; drop leftover CSS globe animations */
 @media (max-width: 767px) {
-  .brand-spin__ball {
-    animation-duration: 4.8s;
-  }
-
   .finger-spin__motion {
     display: none;
   }
@@ -3464,7 +3426,8 @@ body {
   .live-bg__grid,
   .live-bg__orb,
   .ticker-track,
-  .brand-spin__ball,
+  .spin-globe__glow,
+  .spin-globe__glow--gold,
   .finger-spin__sphere,
   .finger-spin__motion span,
   .world-ball__stage,
@@ -3479,7 +3442,6 @@ body {
   .bball-scene__shadow {
     animation: none !important;
   }
-  .brand-spin__ball,
   .finger-spin__sphere,
   .world-ball__sphere,
   .bball-globe {

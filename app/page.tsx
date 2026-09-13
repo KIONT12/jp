@@ -1,11 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { FormEvent, ReactNode, useEffect, useState } from "react";
 import { useIsMobile, usePerformanceMode, useShow3DGlobe } from "./hooks/use-mobile";
 
+const SpinningGlobe = dynamic(() => import("./components/SpinningGlobe"), {
+  ssr: false,
+  loading: () => <div className="spin-globe spin-globe--loading" aria-hidden="true" />,
+});
+
 const LOGO = "/images/logos/jpsa-logo.png";
 const LOGO_FULL = LOGO;
+const GLOBE_TEX = "/images/globe/glow-sphere.webp";
 const FOUNDER_PHOTO = "/images/team/j-parker.jpg";
 const WAYNE_PHOTO = "/images/team/wayne-wooten-headshot.jpg";
 const MUSA_PHOTO = "/images/team/musa-shabazz.png";
@@ -1965,78 +1972,38 @@ function SectionBlock({
   );
 }
 
-const BALL_LOGO_FACES = [0, 180] as const;
-const FINGER_SPIN_HAND = "/images/hero/jp-brand-hand.png";
-const LOGO_BADGE = "/images/logos/jpsa-logo.png";
-
 function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
   if (staticLogo) {
     return (
-      <div className="hero-logo-static">
-        <Image
-          src={LOGO}
-          alt="J. Parker Sports Agency Management"
-          width={377}
-          height={445}
-          className="hero-logo-static__img"
-          priority
-        />
-      </div>
-    );
-  }
-  return <FingerSpinBall />;
-}
-
-function FingerSpinBall() {
-  return (
-    <div
-      className="brand-spin"
-      role="img"
-      aria-label="3D basketball with J. Parker Sports Agency logo spinning on a fingertip"
-    >
-      <div className="brand-spin__halo" aria-hidden="true" />
-
-      <div className="brand-spin__compose">
-        <Image
-          src={FINGER_SPIN_HAND}
-          alt=""
-          width={900}
-          height={900}
-          className="brand-spin__hand"
-          priority
-        />
-
-        <div className="brand-spin__ball-seat">
-          <div className="brand-spin__ball">
-            <div className="brand-spin__leather" />
-            <div className="brand-spin__seams" aria-hidden="true">
-              <span className="brand-spin__seam brand-spin__seam--a" />
-              <span className="brand-spin__seam brand-spin__seam--b" />
-              <span className="brand-spin__seam brand-spin__seam--c" />
-              <span className="brand-spin__seam brand-spin__seam--d" />
-            </div>
-            <div className="brand-spin__badges">
-              {BALL_LOGO_FACES.map((deg, i) => (
-                <div
-                  key={deg}
-                  className="brand-spin__badge"
-                  style={{ transform: `rotateY(${deg}deg) translateZ(var(--badge-r))` }}
-                >
-                  <Image
-                    src={LOGO_BADGE}
-                    alt={i === 0 ? "J. Parker Sports Agency Management" : ""}
-                    width={377}
-                    height={445}
-                    className="brand-spin__badge-img"
-                    priority={i === 0}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="brand-spin__gloss" aria-hidden="true" />
+      <div className="spin-globe spin-globe--static" role="img" aria-label="J. Parker Sports Agency globe">
+        <div className="spin-globe__stage">
+          <div
+            className="spin-globe__body"
+            aria-hidden="true"
+            style={{ backgroundImage: `url(${GLOBE_TEX})` }}
+          />
+          <div className="spin-globe__body-shade" aria-hidden="true" />
+          <div className="spin-globe__logo-overlay">
+            <Image
+              src={LOGO}
+              alt="J. Parker Sports Agency Management"
+              width={377}
+              height={445}
+              className="spin-globe__logo-img"
+              priority
+            />
           </div>
         </div>
       </div>
+    );
+  }
+
+  return (
+    <div className="spin-globe spin-globe--webgl">
+      <div className="spin-globe__glow" aria-hidden="true" />
+      <div className="spin-globe__glow spin-globe__glow--gold" aria-hidden="true" />
+      <div className="spin-globe__shadow" aria-hidden="true" />
+      <SpinningGlobe logoUrl={LOGO} globeUrl={GLOBE_TEX} className="spin-globe__canvas" />
     </div>
   );
 }
