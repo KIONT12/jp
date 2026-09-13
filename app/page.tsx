@@ -1987,22 +1987,23 @@ function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
 
 function BasketballGlobe() {
   return (
-    <div className="bball-scene" role="img" aria-label="J. Parker Sports Agency logo on a spinning basketball globe">
-      <div className="bball-scene__shadow" />
+    <div
+      className="bball-scene tech-globe"
+      role="img"
+      aria-label="J. Parker Sports Agency logo on a tech orbital display"
+    >
+      <div className="bball-scene__shadow tech-globe__shadow" />
+      <div className="tech-globe__glow" aria-hidden="true" />
       <div className="bball-scene__orbit">
-        <div className="bball-scene__ring" />
-        <div className="bball-scene__ring bball-scene__ring--2" />
-        <div className="bball-globe">
-          <div className="bball-globe__body" />
-          <div className="bball-globe__seams">
-            <div className="bball-seam bball-seam--1" />
-            <div className="bball-seam bball-seam--2" />
-            <div className="bball-seam bball-seam--3" />
-            <div className="bball-seam bball-seam--4" />
-          </div>
+        <div className="bball-scene__ring tech-globe__ring" />
+        <div className="bball-scene__ring tech-globe__ring tech-globe__ring--2" />
+        <div className="bball-scene__ring tech-globe__ring tech-globe__ring--3" />
+        <div className="bball-globe tech-globe__core">
+          <div className="bball-globe__body tech-globe__body" />
+          <div className="tech-globe__scan" aria-hidden="true" />
           <div className="bball-globe__logos">
             {GLOBE_LOGO_FACES.map((deg, i) => (
-              <div key={deg} className={`bball-logo-face bball-logo-face--${deg}`}>
+              <div key={deg} className={`bball-logo-face tech-globe__panel bball-logo-face--${deg}`}>
                 <Image
                   src={LOGO_FULL}
                   alt={i === 0 ? "J. Parker Sports Agency Management" : ""}
