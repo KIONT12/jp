@@ -1988,34 +1988,43 @@ function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
 function BasketballGlobe() {
   return (
     <div
-      className="bball-scene tech-globe"
+      className="world-ball"
       role="img"
-      aria-label="J. Parker Sports Agency logo on a tech basketball orbit"
+      aria-label="J. Parker Sports Agency 3D global basketball"
     >
-      <div className="bball-scene__shadow tech-globe__shadow" />
-      <div className="tech-globe__glow" aria-hidden="true" />
-      <div className="bball-scene__orbit">
-        <div className="bball-scene__ring tech-globe__ring" />
-        <div className="bball-scene__ring tech-globe__ring tech-globe__ring--2" />
-        <div className="bball-scene__ring tech-globe__ring tech-globe__ring--3" />
-        <div className="bball-globe tech-globe__core">
-          <div className="bball-globe__body tech-globe__body" />
-          <div className="bball-globe__seams" aria-hidden="true">
-            <div className="bball-seam bball-seam--1" />
-            <div className="bball-seam bball-seam--2" />
-            <div className="bball-seam bball-seam--3" />
-            <div className="bball-seam bball-seam--4" />
+      <div className="world-ball__aura" aria-hidden="true" />
+      <div className="world-ball__shadow" aria-hidden="true" />
+
+      <div className="world-ball__stage">
+        {/* Gyroscope rings — world orbit */}
+        <div className="world-ball__gyro world-ball__gyro--eq" aria-hidden="true" />
+        <div className="world-ball__gyro world-ball__gyro--mer" aria-hidden="true" />
+        <div className="world-ball__gyro world-ball__gyro--tilt" aria-hidden="true" />
+
+        <div className="world-ball__sphere">
+          <div className="world-ball__leather" />
+          <div className="world-ball__seams" aria-hidden="true">
+            <span className="world-ball__seam world-ball__seam--a" />
+            <span className="world-ball__seam world-ball__seam--b" />
+            <span className="world-ball__seam world-ball__seam--c" />
+            <span className="world-ball__seam world-ball__seam--d" />
           </div>
-          <div className="tech-globe__scan" aria-hidden="true" />
-          <div className="bball-globe__logos">
+          <div className="world-ball__grid" aria-hidden="true" />
+          <div className="world-ball__shine" aria-hidden="true" />
+          <div className="world-ball__atmosphere" aria-hidden="true" />
+
+          <div className="world-ball__satellites">
             {GLOBE_LOGO_FACES.map((deg, i) => (
-              <div key={deg} className={`bball-logo-face tech-globe__panel bball-logo-face--${deg}`}>
+              <div
+                key={deg}
+                className={`world-ball__panel world-ball__panel--${deg}`}
+              >
                 <Image
                   src={LOGO_FULL}
                   alt={i === 0 ? "J. Parker Sports Agency Management" : ""}
                   width={377}
                   height={445}
-                  className="w-full h-full object-contain"
+                  className="world-ball__panel-img"
                   priority={i === 0}
                 />
               </div>
