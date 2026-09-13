@@ -1966,7 +1966,7 @@ function SectionBlock({
 }
 
 const GLOBE_LOGO_FACES = [0, 180] as const;
-const FINGER_SPIN_HAND = "/images/hero/finger-spin-hand.png";
+const FINGER_SPIN_HAND = "/images/hero/jp-finger-spin.png";
 
 function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
   if (staticLogo) {
@@ -2047,7 +2047,7 @@ export default function Home() {
   const [activeResumePlayer, setActiveResumePlayer] = useState<RosterPlayer | null>(null);
   const isMobile = useIsMobile(1024);
   const liteMode = usePerformanceMode(1280);
-  const show3DGlobe = useShow3DGlobe(768);
+  const show3DGlobe = useShow3DGlobe();
   const animateText = !liteMode;
 
   function openPlayerResume(player: RosterPlayer) {

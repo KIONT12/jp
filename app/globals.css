@@ -1829,16 +1829,16 @@ body {
 /* ─── FINGER SPIN — live 3D basketball on fingertip ─── */
 .finger-spin {
   position: relative;
-  width: min(320px, 88vw);
-  height: min(360px, 98vw);
+  width: min(340px, 92vw);
+  height: min(400px, 108vw);
   margin: 0 auto;
   perspective: 1200px;
 }
 
 @media (min-width: 640px) {
   .finger-spin {
-    width: 380px;
-    height: 420px;
+    width: 420px;
+    height: 460px;
   }
 }
 
@@ -1879,21 +1879,21 @@ body {
 /* Cover the flat ball in the art — live 3D ball sits on the fingertip */
 .finger-spin__ball-anchor {
   position: absolute;
-  top: 11%;
+  top: 7%;
   left: 50%;
-  width: 148px;
-  height: 148px;
+  width: 168px;
+  height: 168px;
   transform: translateX(-50%);
   transform-style: preserve-3d;
-  z-index: 3;
+  z-index: 5;
   perspective: 900px;
 }
 
 @media (min-width: 640px) {
   .finger-spin__ball-anchor {
-    top: 10%;
-    width: 178px;
-    height: 178px;
+    top: 6%;
+    width: 200px;
+    height: 200px;
   }
 }
 
@@ -3377,10 +3377,16 @@ body {
   }
 }
 
-/* Phones only: freeze 3D ball for smooth scrolling */
+/* Phones: keep finger-spin visible; only drop motion rings for smoothness */
 @media (max-width: 767px) {
-  .finger-spin__sphere,
-  .finger-spin__motion span,
+  .finger-spin__motion {
+    display: none;
+  }
+
+  .finger-spin__sphere {
+    animation-duration: 4.5s;
+  }
+
   .world-ball__stage,
   .world-ball__sphere,
   .world-ball__gyro,
@@ -3394,11 +3400,13 @@ body {
     animation: none !important;
   }
 
-  .finger-spin__sphere {
-    transform: rotateX(-18deg) rotateY(-40deg) !important;
+  .world-ball__sphere,
+  .bball-globe {
+    transform: rotateX(-14deg) rotateY(-28deg) !important;
   }
 
-  .finger-spin__motion {
+  .world-ball__grid,
+  .tech-globe__scan {
     display: none;
   }
 }
