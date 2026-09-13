@@ -1,18 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import { FormEvent, ReactNode, useEffect, useState } from "react";
 import { useIsMobile, usePerformanceMode, useShow3DGlobe } from "./hooks/use-mobile";
 
-const SpinningGlobe = dynamic(() => import("./components/SpinningGlobe"), {
-  ssr: false,
-  loading: () => <div className="spin-globe spin-globe--loading" aria-hidden="true" />,
-});
-
 const LOGO = "/images/logos/jpsa-logo.png";
 const LOGO_FULL = LOGO;
-const GLOBE_TEX = "/images/globe/glow-sphere.webp";
 const FOUNDER_PHOTO = "/images/team/j-parker.jpg";
 const WAYNE_PHOTO = "/images/team/wayne-wooten-headshot.jpg";
 const MUSA_PHOTO = "/images/team/musa-shabazz.png";
@@ -63,7 +56,7 @@ const SERVICES = [
 ];
 
 const JPSA_TAGLINE = "Empowering the Game. Elevating the Player.";
-const SITE_UPDATED = "September 13, 2026 · 3D Globe";
+const SITE_UPDATED = "September 13, 2026";
 
 const HOME_SUCCESS_PROMO = {
   title: "My Next Article Reveals J. Parker’s Success So Far",
@@ -1972,38 +1965,77 @@ function SectionBlock({
   );
 }
 
+const GLOBE_LOGO_FACES = [0, 180] as const;
+const FINGER_SPIN_HAND = "/images/hero/finger-spin-hand.png";
+
 function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
   if (staticLogo) {
     return (
-      <div className="spin-globe spin-globe--static" role="img" aria-label="J. Parker Sports Agency globe">
-        <div className="spin-globe__stage">
-          <div
-            className="spin-globe__body"
-            aria-hidden="true"
-            style={{ backgroundImage: `url(${GLOBE_TEX})` }}
-          />
-          <div className="spin-globe__body-shade" aria-hidden="true" />
-          <div className="spin-globe__logo-overlay">
-            <Image
-              src={LOGO}
-              alt="J. Parker Sports Agency Management"
-              width={377}
-              height={445}
-              className="spin-globe__logo-img"
-              priority
-            />
-          </div>
-        </div>
+      <div className="hero-logo-static">
+        <Image
+          src={LOGO}
+          alt="J. Parker Sports Agency Management"
+          width={377}
+          height={445}
+          className="hero-logo-static__img"
+          priority
+        />
       </div>
     );
   }
+  return <FingerSpinBall />;
+}
 
+function FingerSpinBall() {
   return (
-    <div className="spin-globe spin-globe--webgl">
-      <div className="spin-globe__glow" aria-hidden="true" />
-      <div className="spin-globe__glow spin-globe__glow--gold" aria-hidden="true" />
-      <div className="spin-globe__shadow" aria-hidden="true" />
-      <SpinningGlobe logoUrl={LOGO} globeUrl={GLOBE_TEX} className="spin-globe__canvas" />
+    <div
+      className="finger-spin"
+      role="img"
+      aria-label="Live 3D basketball with J. Parker Sports Agency logo spinning on a fingertip"
+    >
+      <div className="finger-spin__glow" aria-hidden="true" />
+      <div className="finger-spin__hand-wrap">
+        <Image
+          src={FINGER_SPIN_HAND}
+          alt=""
+          width={900}
+          height={900}
+          className="finger-spin__hand"
+          priority
+        />
+      </div>
+
+      <div className="finger-spin__ball-anchor">
+        <div className="finger-spin__motion" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className="finger-spin__sphere">
+          <div className="finger-spin__leather" />
+          <div className="finger-spin__seams" aria-hidden="true">
+            <span className="finger-spin__seam finger-spin__seam--a" />
+            <span className="finger-spin__seam finger-spin__seam--b" />
+            <span className="finger-spin__seam finger-spin__seam--c" />
+            <span className="finger-spin__seam finger-spin__seam--d" />
+          </div>
+          <div className="finger-spin__shine" aria-hidden="true" />
+          <div className="finger-spin__logos">
+            {GLOBE_LOGO_FACES.map((deg, i) => (
+              <div key={deg} className={`finger-spin__panel finger-spin__panel--${deg}`}>
+                <Image
+                  src={LOGO_FULL}
+                  alt={i === 0 ? "J. Parker Sports Agency Management" : ""}
+                  width={377}
+                  height={445}
+                  className="finger-spin__panel-img"
+                  priority={i === 0}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -2015,7 +2047,7 @@ export default function Home() {
   const [activeResumePlayer, setActiveResumePlayer] = useState<RosterPlayer | null>(null);
   const isMobile = useIsMobile(1024);
   const liteMode = usePerformanceMode(1280);
-  const show3DGlobe = useShow3DGlobe();
+  const show3DGlobe = useShow3DGlobe(768);
   const animateText = !liteMode;
 
   function openPlayerResume(player: RosterPlayer) {
@@ -2151,11 +2183,6 @@ export default function Home() {
       {/* HOME */}
       {activeTab === "home" && (
         <div className={liteMode ? "" : "page-enter"}>
-          {/* Standalone glowing globe — freestanding, not boxed */}
-          <div className="globe-hero globe-hero--bleed">
-            <HeroLogo staticLogo={!show3DGlobe} />
-          </div>
-
           {/* ① AGENT PARKER — main attraction */}
           <SectionBlock
             id="founder"
@@ -2163,6 +2190,11 @@ export default function Home() {
             label="Our Founder"
             title="Agent Parker"
             className="agency-section--lead"
+            prepend={
+              <div className="leadership-globe hero-spotlight py-4 sm:py-8 mb-2 sm:mb-4">
+                <HeroLogo staticLogo={!show3DGlobe} />
+              </div>
+            }
           >
             <div className="mt-6 sm:mt-8 max-w-5xl">
               <LeaderProfileCard
