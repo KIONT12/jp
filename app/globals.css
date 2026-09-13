@@ -184,7 +184,13 @@ body {
   overflow: visible;
   z-index: 3;
   isolation: isolate;
-  padding: 1rem 0 2rem;
+  padding: 0.5rem 0 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .hero-spotlight {
+    padding: 1rem 0 2rem;
+  }
 }
 
 .hero-spotlight .bball-scene {
@@ -1827,8 +1833,8 @@ body {
 /* ─── 3D BASKETBALL GLOBE (original) ─── */
 .bball-scene {
   position: relative;
-  width: 260px;
-  height: 300px;
+  width: min(260px, 82vw);
+  height: min(300px, 92vw);
   margin: 0 auto;
   perspective: 1100px;
   perspective-origin: 50% 42%;
@@ -1841,6 +1847,13 @@ body {
   }
 }
 
+@media (min-width: 1024px) {
+  .bball-scene {
+    width: 360px;
+    height: 400px;
+  }
+}
+
 .bball-scene__shadow {
   position: absolute;
   bottom: 8px;
@@ -1850,7 +1863,7 @@ body {
   transform: translateX(-50%);
   background: radial-gradient(ellipse, rgba(196, 30, 58, 0.18) 0%, transparent 70%);
   filter: blur(8px);
-  animation: shadow-pulse 4s ease-in-out infinite;
+  animation: shadow-pulse 2.8s ease-in-out infinite;
 }
 
 @keyframes shadow-pulse {
@@ -1865,7 +1878,7 @@ body {
   align-items: center;
   justify-content: center;
   transform-style: preserve-3d;
-  animation: orbit-tilt 9s ease-in-out infinite alternate;
+  animation: orbit-tilt 5s ease-in-out infinite alternate;
 }
 
 @keyframes orbit-tilt {
@@ -1880,7 +1893,7 @@ body {
   border: 1px dashed rgba(196, 30, 58, 0.22);
   border-radius: 50%;
   transform: rotateX(72deg);
-  animation: ring-spin 22s linear infinite;
+  animation: ring-spin 10s linear infinite;
   pointer-events: none;
 }
 
@@ -1888,7 +1901,7 @@ body {
   width: 118%;
   height: 118%;
   border-color: rgba(165, 28, 36, 0.12);
-  animation-duration: 32s;
+  animation-duration: 14s;
   animation-direction: reverse;
 }
 
@@ -1898,10 +1911,11 @@ body {
 
 .bball-globe {
   position: relative;
-  width: 220px;
-  height: 220px;
+  width: min(220px, 70vw);
+  height: min(220px, 70vw);
   transform-style: preserve-3d;
-  animation: bball-spin 16s linear infinite;
+  animation: bball-spin 6s linear infinite;
+  will-change: transform;
   --globe-r: 108px;
 }
 
@@ -1910,6 +1924,15 @@ body {
     width: 270px;
     height: 270px;
     --globe-r: 132px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bball-globe {
+    width: 300px;
+    height: 300px;
+    --globe-r: 148px;
+    animation-duration: 5.5s;
   }
 }
 
@@ -1991,12 +2014,30 @@ body {
   border: 1px solid rgba(165, 28, 36, 0.35);
 }
 
+@media (max-width: 639px) {
+  .bball-logo-face {
+    width: 96px;
+    height: 118px;
+    margin-left: -48px;
+    margin-top: -59px;
+  }
+}
+
 @media (min-width: 640px) {
   .bball-logo-face {
     width: 128px;
     height: 156px;
     margin-left: -64px;
     margin-top: -78px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bball-logo-face {
+    width: 142px;
+    height: 172px;
+    margin-left: -71px;
+    margin-top: -86px;
   }
 }
 
@@ -3300,18 +3341,18 @@ body {
   }
 }
 
-/* Phones: keep original globe spinning, just slower + drop orbit rings */
+/* Phones: compact fit, still spins fast */
 @media (max-width: 767px) {
   .bball-scene {
-    width: min(240px, 78vw);
-    height: min(280px, 88vw);
+    width: min(230px, 76vw);
+    height: min(265px, 86vw);
   }
 
   .bball-globe {
-    width: 200px;
-    height: 200px;
-    --globe-r: 98px;
-    animation-duration: 22s;
+    width: min(190px, 62vw);
+    height: min(190px, 62vw);
+    --globe-r: 92px;
+    animation-duration: 7s;
   }
 
   .bball-scene__ring,
