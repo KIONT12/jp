@@ -6,6 +6,7 @@ import { useIsMobile, usePerformanceMode, useShow3DGlobe } from "./hooks/use-mob
 
 const LOGO = "/images/logos/jpsa-logo.png";
 const LOGO_FULL = LOGO;
+const GLOBE_TEX = "/images/globe/ornate-globe.jpg";
 const FOUNDER_PHOTO = "/images/team/j-parker.jpg";
 const WAYNE_PHOTO = "/images/team/wayne-wooten-headshot.jpg";
 const MUSA_PHOTO = "/images/team/musa-shabazz.png";
@@ -56,7 +57,7 @@ const SERVICES = [
 ];
 
 const JPSA_TAGLINE = "Empowering the Game. Elevating the Player.";
-const SITE_UPDATED = "September 13, 2026 · Logo Globe";
+const SITE_UPDATED = "September 13, 2026 · Ornate Globe";
 
 const HOME_SUCCESS_PROMO = {
   title: "My Next Article Reveals J. Parker’s Success So Far",
@@ -1970,15 +1971,29 @@ const GLOBE_LOGO_FACES = [0, 180] as const;
 function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
   if (staticLogo) {
     return (
-      <div className="hero-logo-static">
-        <Image
-          src={LOGO}
-          alt="J. Parker Sports Agency Management"
-          width={377}
-          height={445}
-          className="hero-logo-static__img"
-          priority
-        />
+      <div className="ornate-globe ornate-globe--static" role="img" aria-label="J. Parker Sports Agency globe">
+        <div className="ornate-globe__sphere ornate-globe__sphere--static">
+          <div className="ornate-globe__tex-wrap">
+            <Image
+              src={GLOBE_TEX}
+              alt=""
+              width={800}
+              height={800}
+              className="ornate-globe__tex"
+              priority
+            />
+          </div>
+          <div className="ornate-globe__logo-fit">
+            <Image
+              src={LOGO}
+              alt="J. Parker Sports Agency Management"
+              width={377}
+              height={445}
+              className="ornate-globe__logo-img"
+              priority
+            />
+          </div>
+        </div>
       </div>
     );
   }
@@ -1988,40 +2003,42 @@ function HeroLogo({ staticLogo }: { staticLogo?: boolean }) {
 function BasketballGlobe() {
   return (
     <div
-      className="logo-globe"
+      className="ornate-globe"
       role="img"
-      aria-label="J. Parker Sports Agency logo on a spinning basketball globe"
+      aria-label="Live 3D J. Parker Sports Agency globe with logo"
     >
-      <div className="logo-globe__halo" aria-hidden="true" />
-      <div className="logo-globe__floor" aria-hidden="true" />
+      <div className="ornate-globe__halo" aria-hidden="true" />
+      <div className="ornate-globe__floor" aria-hidden="true" />
 
-      <div className="logo-globe__rig">
-        <div className="logo-globe__ring logo-globe__ring--main" aria-hidden="true" />
-        <div className="logo-globe__ring logo-globe__ring--fine" aria-hidden="true" />
+      <div className="ornate-globe__rig">
+        <div className="ornate-globe__ring ornate-globe__ring--main" aria-hidden="true" />
+        <div className="ornate-globe__ring ornate-globe__ring--fine" aria-hidden="true" />
 
-        <div className="logo-globe__ball">
-          <div className="logo-globe__skin" />
-          <div className="logo-globe__seams" aria-hidden="true">
-            <span className="logo-globe__seam logo-globe__seam--1" />
-            <span className="logo-globe__seam logo-globe__seam--2" />
-            <span className="logo-globe__seam logo-globe__seam--3" />
-            <span className="logo-globe__seam logo-globe__seam--4" />
+        <div className="ornate-globe__sphere">
+          <div className="ornate-globe__tex-wrap">
+            <Image
+              src={GLOBE_TEX}
+              alt=""
+              width={800}
+              height={800}
+              className="ornate-globe__tex"
+              priority
+            />
+            <div className="ornate-globe__glass" aria-hidden="true" />
           </div>
-          <div className="logo-globe__world" aria-hidden="true" />
-          <div className="logo-globe__spec" aria-hidden="true" />
 
-          <div className="logo-globe__brands">
+          <div className="ornate-globe__brands">
             {GLOBE_LOGO_FACES.map((deg, i) => (
               <div
                 key={deg}
-                className={`logo-globe__badge logo-globe__badge--${deg}`}
+                className={`ornate-globe__logo-fit ornate-globe__logo-fit--${deg}`}
               >
                 <Image
                   src={LOGO_FULL}
                   alt={i === 0 ? "J. Parker Sports Agency Management" : ""}
                   width={377}
                   height={445}
-                  className="logo-globe__badge-img"
+                  className="ornate-globe__logo-img"
                   priority={i === 0}
                 />
               </div>

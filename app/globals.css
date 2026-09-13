@@ -1824,276 +1824,235 @@ body {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* ─── LOGO GLOBE — branded basketball spinning as a little world ─── */
-.logo-globe {
+/* ─── ORNATE GLOBE — live 3D globe from design, logo fitted on sphere ─── */
+.ornate-globe {
   position: relative;
-  width: min(280px, 84vw);
-  height: min(320px, 92vw);
+  width: min(300px, 86vw);
+  height: min(340px, 96vw);
   margin: 0 auto;
-  perspective: 1300px;
+  perspective: 1400px;
   perspective-origin: 50% 42%;
 }
 
 @media (min-width: 640px) {
-  .logo-globe {
-    width: 340px;
-    height: 380px;
+  .ornate-globe {
+    width: 360px;
+    height: 400px;
   }
 }
 
-.logo-globe__halo {
+.ornate-globe__halo {
   position: absolute;
-  inset: 12% 8%;
+  inset: 10% 6%;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 50% 48%, rgba(239, 138, 58, 0.28) 0%, transparent 48%),
-    radial-gradient(circle at 50% 55%, rgba(196, 30, 58, 0.18) 0%, transparent 68%);
-  filter: blur(20px);
+    radial-gradient(circle at 50% 48%, rgba(212, 175, 55, 0.28) 0%, transparent 45%),
+    radial-gradient(circle at 50% 55%, rgba(30, 80, 160, 0.35) 0%, transparent 65%);
+  filter: blur(22px);
   pointer-events: none;
   z-index: 0;
 }
 
-.logo-globe__floor {
+.ornate-globe__floor {
   position: absolute;
-  bottom: 8px;
+  bottom: 6px;
   left: 50%;
-  width: 62%;
-  height: 22px;
+  width: 64%;
+  height: 24px;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse, rgba(196, 30, 58, 0.32) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 75%);
-  filter: blur(9px);
-  animation: logo-globe-floor 4.5s ease-in-out infinite;
+  background: radial-gradient(ellipse, rgba(212, 175, 55, 0.28) 0%, rgba(0, 0, 0, 0.5) 48%, transparent 75%);
+  filter: blur(10px);
+  animation: ornate-floor 5s ease-in-out infinite;
   z-index: 0;
 }
 
-@keyframes logo-globe-floor {
-  0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.75; }
-  50% { transform: translateX(-50%) scaleX(0.88); opacity: 0.4; }
+@keyframes ornate-floor {
+  0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.8; }
+  50% { transform: translateX(-50%) scaleX(0.88); opacity: 0.45; }
 }
 
-.logo-globe__rig {
+.ornate-globe__rig {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   transform-style: preserve-3d;
-  animation: logo-globe-tilt 11s ease-in-out infinite alternate;
+  animation: ornate-tilt 12s ease-in-out infinite alternate;
   z-index: 1;
 }
 
-@keyframes logo-globe-tilt {
+@keyframes ornate-tilt {
   0% { transform: rotateX(10deg) rotateZ(-3deg); }
-  100% { transform: rotateX(15deg) rotateZ(3deg); }
+  100% { transform: rotateX(16deg) rotateZ(3deg); }
 }
 
-/* Single planetary ring — clean globe silhouette */
-.logo-globe__ring {
+.ornate-globe__ring {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
 }
 
-.logo-globe__ring--main {
-  width: 122%;
-  height: 122%;
-  border: 2.5px solid rgba(255, 60, 70, 0.85);
+.ornate-globe__ring--main {
+  width: 118%;
+  height: 118%;
+  border: 2px solid rgba(212, 175, 55, 0.65);
   box-shadow:
-    0 0 24px rgba(196, 30, 58, 0.65),
-    0 0 6px rgba(255, 180, 100, 0.45),
-    inset 0 0 14px rgba(196, 30, 58, 0.25);
+    0 0 20px rgba(212, 175, 55, 0.45),
+    0 0 8px rgba(80, 140, 220, 0.25),
+    inset 0 0 12px rgba(212, 175, 55, 0.15);
   transform: rotateX(76deg);
-  animation: logo-globe-ring 18s linear infinite;
+  animation: ornate-ring 20s linear infinite;
 }
 
-.logo-globe__ring--fine {
-  width: 132%;
-  height: 132%;
-  border: 1px dashed rgba(255, 140, 100, 0.35);
-  transform: rotateX(76deg) rotateZ(12deg);
-  animation: logo-globe-ring 26s linear infinite reverse;
-  box-shadow: 0 0 8px rgba(196, 30, 58, 0.2);
+.ornate-globe__ring--fine {
+  width: 128%;
+  height: 128%;
+  border: 1px dashed rgba(160, 200, 255, 0.35);
+  transform: rotateX(76deg) rotateZ(10deg);
+  animation: ornate-ring 28s linear infinite reverse;
 }
 
-@keyframes logo-globe-ring {
+@keyframes ornate-ring {
   to { transform: rotateX(76deg) rotateZ(360deg); }
 }
 
-.logo-globe__ball {
+.ornate-globe__sphere {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 210px;
+  height: 210px;
   transform-style: preserve-3d;
-  animation: logo-globe-spin 14s linear infinite;
-  /* Logo sits ON the ball surface — little branded globe */
-  --badge-r: 102px;
+  animation: ornate-spin 16s linear infinite;
+  /* Logo sits just on the globe surface */
+  --logo-r: 106px;
 }
 
 @media (min-width: 640px) {
-  .logo-globe__ball {
-    width: 240px;
-    height: 240px;
-    --badge-r: 122px;
+  .ornate-globe__sphere {
+    width: 250px;
+    height: 250px;
+    --logo-r: 126px;
   }
 }
 
-@keyframes logo-globe-spin {
-  from { transform: rotateX(-18deg) rotateY(0deg); }
-  to { transform: rotateX(-18deg) rotateY(360deg); }
+.ornate-globe__sphere--static {
+  animation: none;
+  transform: rotateX(-8deg) rotateY(-18deg);
 }
 
-.logo-globe__skin {
+@keyframes ornate-spin {
+  from { transform: rotateX(-12deg) rotateY(0deg); }
+  to { transform: rotateX(-12deg) rotateY(360deg); }
+}
+
+.ornate-globe__tex-wrap {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  transform: translateZ(0);
+  box-shadow:
+    inset -18px -22px 40px rgba(0, 0, 0, 0.55),
+    inset 12px 14px 28px rgba(255, 220, 140, 0.12),
+    0 0 0 2px rgba(212, 175, 55, 0.28),
+    0 0 36px rgba(40, 100, 180, 0.35),
+    0 0 60px rgba(212, 175, 55, 0.18),
+    0 20px 44px rgba(0, 0, 0, 0.55);
+}
+
+.ornate-globe__tex {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: scale(1.06);
+}
+
+.ornate-globe__glass {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 28% 20%, rgba(255, 240, 220, 0.45) 0%, transparent 24%),
-    radial-gradient(circle at 76% 78%, rgba(50, 12, 4, 0.6) 0%, transparent 40%),
-    radial-gradient(circle at 46% 40%, #f08c3c 0%, #d2691e 36%, #a04812 64%, #4a1c08 100%);
-  box-shadow:
-    inset -30px -34px 54px rgba(25, 6, 0, 0.82),
-    inset 16px 18px 34px rgba(255, 200, 140, 0.22),
-    0 0 0 1px rgba(255, 150, 90, 0.2),
-    0 0 40px rgba(196, 30, 58, 0.25),
-    0 18px 42px rgba(0, 0, 0, 0.55);
-}
-
-.logo-globe__skin::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background-image: radial-gradient(rgba(45, 16, 5, 0.3) 0.6px, transparent 0.6px);
-  background-size: 4px 4px;
-  opacity: 0.55;
-  -webkit-mask-image: radial-gradient(circle, black 50%, transparent 80%);
-  mask-image: radial-gradient(circle, black 50%, transparent 80%);
-}
-
-.logo-globe__seams {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
+    radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.28) 0%, transparent 28%),
+    radial-gradient(circle at 70% 78%, rgba(0, 20, 60, 0.25) 0%, transparent 42%);
   pointer-events: none;
   z-index: 2;
 }
 
-.logo-globe__seam {
-  position: absolute;
-  inset: 2%;
-  border-radius: 50%;
-  border: 2.5px solid rgba(22, 8, 3, 0.9);
-  box-shadow: 0 0 0 1px rgba(255, 140, 80, 0.1);
-}
-
-.logo-globe__seam--1 { transform: rotateY(0deg); }
-.logo-globe__seam--2 { transform: rotateY(58deg); }
-.logo-globe__seam--3 { transform: rotateY(116deg); }
-.logo-globe__seam--4 {
-  transform: rotateX(90deg) scaleX(0.93);
-  border-color: rgba(22, 8, 3, 0.75);
-}
-
-/* Soft globe latitude lines */
-.logo-globe__world {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  z-index: 3;
-  pointer-events: none;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0 13%,
-      rgba(255, 255, 255, 0.08) 13% 13.5%
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 16%,
-      rgba(196, 30, 58, 0.12) 16% 16.4%
-    );
-  -webkit-mask-image: radial-gradient(circle, black 48%, transparent 76%);
-  mask-image: radial-gradient(circle, black 48%, transparent 76%);
-  mix-blend-mode: soft-light;
-  opacity: 0.75;
-}
-
-.logo-globe__spec {
-  position: absolute;
-  top: 12%;
-  left: 18%;
-  width: 36%;
-  height: 26%;
-  border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.4) 0%, transparent 68%);
-  filter: blur(1.5px);
-  z-index: 4;
-  pointer-events: none;
-  animation: logo-globe-spec 6s ease-in-out infinite alternate;
-}
-
-@keyframes logo-globe-spec {
-  from { opacity: 0.5; transform: translate(0, 0); }
-  to { opacity: 0.85; transform: translate(8%, 6%); }
-}
-
-/* Logo badges flush on the ball — branded little globe */
-.logo-globe__brands {
+.ornate-globe__brands {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
-  z-index: 6;
+  z-index: 4;
 }
 
-.logo-globe__badge {
+/* Logo fitted ON the globe — sized to stay inside the sphere face */
+.ornate-globe__logo-fit {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 92px;
-  height: 112px;
-  margin-left: -46px;
-  margin-top: -56px;
+  width: 50%;
+  height: 50%;
+  margin-left: -25%;
+  margin-top: -25%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(8, 8, 10, 0.92);
-  border-radius: 14px;
+  border-radius: 50%;
   overflow: hidden;
-  border: 1px solid rgba(255, 80, 70, 0.55);
+  background: rgba(4, 8, 18, 0.62);
+  border: 1px solid rgba(212, 175, 55, 0.6);
   box-shadow:
-    0 0 16px rgba(196, 30, 58, 0.4),
-    0 6px 16px rgba(0, 0, 0, 0.45),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    0 0 18px rgba(212, 175, 55, 0.4),
+    inset 0 0 14px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  padding: 8%;
+  box-sizing: border-box;
   backface-visibility: hidden;
 }
 
-@media (min-width: 640px) {
-  .logo-globe__badge {
-    width: 108px;
-    height: 132px;
-    margin-left: -54px;
-    margin-top: -66px;
-  }
+.ornate-globe__logo-fit--0 {
+  transform: rotateY(0deg) translateZ(var(--logo-r));
 }
 
-.logo-globe__badge--0 {
-  transform: rotateY(0deg) translateZ(var(--badge-r));
-  backface-visibility: visible;
+.ornate-globe__logo-fit--180 {
+  transform: rotateY(180deg) translateZ(var(--logo-r));
 }
 
-.logo-globe__badge--180 {
-  transform: rotateY(180deg) translateZ(var(--badge-r));
-  backface-visibility: visible;
-}
-
-.logo-globe__badge-img {
+.ornate-globe__logo-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.65));
 }
 
-.hero-spotlight .logo-globe {
+/* Static reduced-motion / fallback uses same fitted logo on globe */
+.ornate-globe--static {
+  height: auto;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: none;
+}
+
+.ornate-globe--static .ornate-globe__sphere {
+  position: relative;
+}
+
+.ornate-globe--static .ornate-globe__logo-fit {
+  transform: none;
+  left: 50%;
+  top: 50%;
+  z-index: 5;
+}
+
+.hero-spotlight .ornate-globe {
   position: relative;
   z-index: 2;
   flex-shrink: 0;
@@ -2102,6 +2061,8 @@ body {
 .live-bg--lite .live-bg__aurora {
   animation: none;
 }
+
+
 
 
 
@@ -3398,58 +3359,41 @@ body {
   }
 }
 
-/* Phones: keep the globe visible, use a lighter spin (still clearly 3D) */
+/* Phones: lighter live globe, logo still fitted */
 @media (max-width: 767px) {
-  .logo-globe {
-    width: min(240px, 78vw);
-    height: min(270px, 86vw);
+  .ornate-globe {
+    width: min(250px, 82vw);
+    height: min(280px, 90vw);
   }
 
-  .logo-globe__ball {
-    width: 168px;
-    height: 168px;
-    --badge-r: 86px;
+  .ornate-globe__sphere {
+    width: 180px;
+    height: 180px;
+    --logo-r: 91px;
     animation-duration: 18s;
   }
 
-  .logo-globe__badge {
-    width: 72px;
-    height: 88px;
-    margin-left: -36px;
-    margin-top: -44px;
+  .ornate-globe__logo-fit {
+    width: 54%;
+    height: 54%;
+    margin-left: -27%;
+    margin-top: -27%;
+    padding: 6%;
   }
 
-  .logo-globe__ring--fine,
-  .logo-globe__world {
+  .ornate-globe__ring--fine {
     display: none;
   }
 
-  .logo-globe__ring--main {
+  .ornate-globe__ring--main {
     animation-duration: 24s;
   }
 
-  .logo-globe__rig {
-    animation-duration: 16s;
-  }
-
-  .bball-globe,
-  .bball-scene__orbit,
-  .bball-scene__ring,
-  .bball-scene__shadow,
-  .tech-globe__ring,
-  .tech-globe__shadow,
-  .tech-globe__scan {
-    animation: none !important;
-  }
-
-  .bball-globe {
-    transform: rotateX(-14deg) rotateY(-28deg) !important;
-  }
-
-  .tech-globe__scan {
-    display: none;
+  .ornate-globe__rig {
+    animation-duration: 14s;
   }
 }
+
 
 /* Mobile layout tweaks */
 @media (max-width: 767px) {
@@ -3551,12 +3495,12 @@ body {
   .live-bg__grid,
   .live-bg__orb,
   .ticker-track,
-  .logo-globe__rig,
-  .logo-globe__ball,
-  .logo-globe__ring,
-  .logo-globe__floor,
-  .logo-globe__spec,
-  .logo-globe__halo,
+  .ornate-globe__rig,
+  .ornate-globe__sphere,
+  .ornate-globe__ring,
+  .ornate-globe__floor,
+  .ornate-globe__glass,
+  .ornate-globe__halo,
   .bball-globe,
   .bball-scene__orbit,
   .bball-scene__ring,
@@ -3566,7 +3510,7 @@ body {
   .tech-globe__scan {
     animation: none !important;
   }
-  .logo-globe__ball,
+  .ornate-globe__sphere,
   .bball-globe {
     transform: rotateX(-14deg) rotateY(-28deg) !important;
   }
