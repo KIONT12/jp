@@ -1829,31 +1829,45 @@ body {
 /* ─── FINGER SPIN — live 3D basketball on fingertip ─── */
 .finger-spin {
   position: relative;
-  width: min(340px, 92vw);
-  height: min(400px, 108vw);
+  width: min(320px, 90vw);
+  height: min(360px, 100vw);
   margin: 0 auto;
   perspective: 1100px;
 }
 
 @media (min-width: 640px) {
   .finger-spin {
-    width: 420px;
-    height: 460px;
+    width: 380px;
+    height: 420px;
   }
 }
 
 .finger-spin__glow {
   position: absolute;
-  top: 10%;
+  top: 12%;
   left: 50%;
-  width: 55%;
-  height: 40%;
+  width: 48%;
+  height: 36%;
   transform: translateX(-50%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(224, 122, 50, 0.2) 0%, transparent 70%);
-  filter: blur(16px);
+  background: radial-gradient(circle, rgba(224, 122, 50, 0.18) 0%, transparent 70%);
+  filter: blur(14px);
   pointer-events: none;
   z-index: 0;
+}
+
+/* Smaller hand + ball as one stage so fingertip alignment stays correct */
+.finger-spin__stage {
+  position: absolute;
+  inset: 0;
+  transform: scale(0.72);
+  transform-origin: center 58%;
+}
+
+@media (min-width: 640px) {
+  .finger-spin__stage {
+    transform: scale(0.7);
+  }
 }
 
 .finger-spin__hand-wrap {
@@ -1871,21 +1885,17 @@ body {
   height: 100%;
   object-fit: contain;
   object-position: center center;
-  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.45));
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.4));
   user-select: none;
 }
 
-/*
-  Fingertip in jp-woman-hand-v2.png ≈ 52.2% x, 24.1% y.
-  Anchor bottom-center of the ball on that point.
-*/
 .finger-spin__ball-anchor {
   position: absolute;
   left: 52.2%;
   top: 24.1%;
-  width: 132px;
-  height: 132px;
-  transform: translate(-50%, calc(-100% + 10px));
+  width: 148px;
+  height: 148px;
+  transform: translate(-50%, calc(-100% + 11px));
   transform-style: preserve-3d;
   z-index: 4;
   perspective: 900px;
@@ -1893,8 +1903,8 @@ body {
 
 @media (min-width: 640px) {
   .finger-spin__ball-anchor {
-    width: 156px;
-    height: 156px;
+    width: 168px;
+    height: 168px;
     transform: translate(-50%, calc(-100% + 12px));
   }
 }
@@ -1904,13 +1914,13 @@ body {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  animation: finger-ball-spin 3.2s linear infinite;
-  --decal-r: 64px;
+  animation: finger-ball-spin 3.4s linear infinite;
+  --decal-r: 72px;
 }
 
 @media (min-width: 640px) {
   .finger-spin__sphere {
-    --decal-r: 76px;
+    --decal-r: 82px;
   }
 }
 
@@ -1924,14 +1934,14 @@ body {
   inset: 0;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 32% 24%, rgba(255, 236, 210, 0.48) 0%, transparent 28%),
-    radial-gradient(circle at 72% 78%, rgba(80, 25, 5, 0.45) 0%, transparent 42%),
+    radial-gradient(circle at 32% 24%, rgba(255, 236, 210, 0.4) 0%, transparent 28%),
+    radial-gradient(circle at 72% 78%, rgba(80, 25, 5, 0.4) 0%, transparent 42%),
     radial-gradient(circle at 48% 44%, #f08c3a 0%, #de6a1c 36%, #b04810 64%, #5c2208 100%);
   box-shadow:
-    inset -20px -24px 36px rgba(40, 10, 0, 0.7),
-    inset 12px 14px 24px rgba(255, 200, 130, 0.2),
-    0 8px 22px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(90, 35, 10, 0.35);
+    inset -20px -24px 36px rgba(40, 10, 0, 0.68),
+    inset 12px 14px 24px rgba(255, 200, 130, 0.18),
+    0 8px 20px rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(90, 35, 10, 0.3);
 }
 
 .finger-spin__leather::after {
@@ -1939,9 +1949,9 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background-image: radial-gradient(rgba(50, 18, 6, 0.28) 0.55px, transparent 0.55px);
+  background-image: radial-gradient(rgba(50, 18, 6, 0.26) 0.55px, transparent 0.55px);
   background-size: 4px 4px;
-  opacity: 0.45;
+  opacity: 0.4;
   -webkit-mask-image: radial-gradient(circle, black 50%, transparent 80%);
   mask-image: radial-gradient(circle, black 50%, transparent 80%);
 }
@@ -1958,7 +1968,7 @@ body {
   position: absolute;
   inset: 3%;
   border-radius: 50%;
-  border: 2.2px solid rgba(20, 8, 4, 0.9);
+  border: 2.1px solid rgba(20, 8, 4, 0.88);
 }
 
 .finger-spin__seam--a { transform: rotateY(0deg); }
@@ -1966,10 +1976,10 @@ body {
 .finger-spin__seam--c { transform: rotateY(110deg); }
 .finger-spin__seam--d {
   transform: rotateX(90deg) scaleX(0.94);
-  border-color: rgba(20, 8, 4, 0.75);
+  border-color: rgba(20, 8, 4, 0.72);
 }
 
-/* Logo printed onto the ball surface (no glowing cards) */
+/* Full logo wrapped around the ball (5 faces) */
 .finger-spin__decals {
   position: absolute;
   inset: 0;
@@ -1982,37 +1992,28 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 58%;
-  height: 58%;
-  margin-left: -29%;
-  margin-top: -29%;
-  border-radius: 50%;
+  width: 72%;
+  height: 78%;
+  margin-left: -36%;
+  margin-top: -39%;
+  border-radius: 18%;
   overflow: hidden;
-  background: transparent;
+  background: rgba(8, 8, 8, 0.2);
   border: none;
   box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  -webkit-mask-image: radial-gradient(circle, black 62%, transparent 78%);
-  mask-image: radial-gradient(circle, black 62%, transparent 78%);
-}
-
-.finger-spin__decal--0 {
-  transform: rotateY(0deg) translateZ(var(--decal-r));
-}
-
-.finger-spin__decal--180 {
-  transform: rotateY(180deg) translateZ(var(--decal-r));
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .finger-spin__decal-img {
-  width: 86%;
-  height: 86%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
-  opacity: 0.95;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
 }
 
 .finger-spin__shine {
@@ -2022,7 +2023,7 @@ body {
   width: 34%;
   height: 24%;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.38) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.32) 0%, transparent 70%);
   filter: blur(1.5px);
   z-index: 5;
   pointer-events: none;
